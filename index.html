@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de calefacción 2026: ¿cuánto gasta tu estufa y cuál es más barata?</title>
+<meta name="description" content="Calcula gratis cuánto te cuesta calentar tu casa con una estufa eléctrica, de pellets, de leña o de butano, y cuánto ahorras si dejas el gasóleo. Precios de septiembre de 2026.">
+<meta property="og:title" content="¿Cuánto te cuesta calentar tu casa? Calculadora de calefacción 2026">
+<meta property="og:description" content="Compara el gasto de estufas eléctricas, de pellets, de leña y de butano con los precios actuales.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#C1440E">
+<link rel="canonical" href="https://calculadora-calefaccion.github.io/">
+<meta property="og:url" content="https://calculadora-calefaccion.github.io/">
+<meta property="og:site_name" content="Calculadora de Calefacción">
+<meta property="og:locale" content="es_ES">
+<!-- Google tag (gtag.js) — misma propiedad que CalorBrasa -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVWVPP7SK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QXVWVPP7SK');
+</script>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C1440E'/%3E%3Cpath d='M16 6c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-3-1-6 1-9z' fill='%23F2A93B'/%3E%3C/svg%3E">
+<style>
+:root{
+  --primary:#C1440E; --primary-dark:#9c3609; --amber:#F2A93B; --amber-soft:#FCEBCB;
+  --bg:#FAF7F2; --surface:#FFFFFF; --surface-2:#F4EFE8; --text:#221F1D; --muted:#5c5652; --faint:#8a827c;
+  --border:#E7E0D6; --good:#2f7d4f; --good-soft:#e3f2e8; --bar-track:#EFE8DF;
+  --radius:14px; --shadow:0 2px 12px rgba(21,19,18,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --primary:#E0622C; --primary-dark:#c24f1c; --amber:#F2A93B; --amber-soft:#3a2a14;
+    --bg:#151312; --surface:#1f1c1a; --surface-2:#282421; --text:#F3EEE8; --muted:#bdb4ac; --faint:#8f8680;
+    --border:#37312d; --good:#5fc28a; --good-soft:#18301f; --bar-track:#2d2825; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --primary:#E0622C; --primary-dark:#c24f1c; --amber:#F2A93B; --amber-soft:#3a2a14;
+  --bg:#151312; --surface:#1f1c1a; --surface-2:#282421; --text:#F3EEE8; --muted:#bdb4ac; --faint:#8f8680;
+  --border:#37312d; --good:#5fc28a; --good-soft:#18301f; --bar-track:#2d2825; --shadow:none;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--primary)}
+button,select,input{font:inherit;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Cabecera */
+.top{background:#151312;color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:700}
+.brand small{display:block;font-weight:400;color:#cfc6bf;font-size:12px;line-height:1.2}
+.logo{width:32px;height:32px;flex:none}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;text-decoration:none;border:0;border-radius:999px;padding:9px 16px;font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--primary-dark)}
+.btn.ghost{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.btn.ghost:hover{background:var(--primary);color:#fff}
+.net{background:var(--surface);border-bottom:1px solid var(--border)}
+.net .wrap{display:flex;gap:18px;overflow-x:auto;padding-top:9px;padding-bottom:9px;font-size:14px;white-space:nowrap;scrollbar-width:none}
+.net a{color:var(--muted);text-decoration:none}
+.net a:hover{color:var(--primary)}
+.net a.star{color:var(--primary);font-weight:700}
+.net a.on{color:var(--text);font-weight:600}
+
+/* Hero */
+.hero{padding:28px 0 8px}
+.hero h1{font-size:clamp(26px,4.5vw,38px);line-height:1.15;margin:0 0 10px;letter-spacing:-.4px}
+.hero p{margin:0 0 14px;color:var(--muted);max-width:720px;font-size:17px}
+.trust{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.trust li{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--muted)}
+.trust li b{color:var(--text)}
+
+/* Pestañas */
+.tabs{display:flex;gap:6px;background:var(--surface-2);border-radius:999px;padding:5px;margin:20px 0 18px;width:max-content;max-width:100%}
+.tabs button{border:0;background:transparent;border-radius:999px;padding:9px 18px;font-weight:600;font-size:15px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+
+/* Rejilla principal */
+.layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:20px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.inputs{position:sticky;top:12px}
+.step{padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.step h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.num{width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.opt{font-weight:400;color:var(--faint);font-size:13px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field > label,.lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;margin-bottom:6px}
+.field > label output,.lbl output{font-weight:700;color:var(--primary);font-size:16px}
+.hint{font-size:13px;color:var(--muted);margin-top:5px}
+select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg);font-size:16px}
+input[type=number]{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);font-size:16px}
+input[type=range]{width:100%;accent-color:var(--primary);height:28px;margin:0}
+.clima{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;background:var(--amber-soft);border-radius:10px;padding:8px 12px;font-size:14px}
+.link{background:none;border:0;color:var(--primary);text-decoration:underline;cursor:pointer;padding:0;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.seg{display:grid;gap:8px}
+.seg.c3{grid-template-columns:repeat(3,1fr)}
+.seg button{border:1.5px solid var(--border);background:var(--bg);border-radius:10px;padding:9px 6px;font-size:14px;cursor:pointer;line-height:1.25;text-align:center}
+.seg button small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.seg button[aria-pressed="true"]{border-color:var(--primary);background:var(--amber-soft)}
+.seg button[aria-pressed="true"] small{color:var(--text)}
+
+/* Resultados */
+.results{display:grid;gap:18px;min-width:0}
+.summary{background:linear-gradient(135deg,#1c1816,#2a1f1a);color:#fff;border:0}
+.summary .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:4px 0 14px}
+.kpi small{display:block;color:#d6ccc4;font-size:13px}
+.kpi b{display:block;font-size:clamp(22px,3.4vw,30px);line-height:1.15;letter-spacing:-.3px}
+.kpi b.hot{color:var(--amber)}
+.summary .ctx{font-size:14px;color:#d6ccc4;margin:0}
+.summary .verdict{margin:14px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);font-size:16px}
+.summary .verdict b{color:var(--amber)}
+.card h2{font-size:20px;margin:0 0 4px;letter-spacing:-.2px}
+.card .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.row{display:grid;grid-template-columns:28px 1fr auto;gap:4px 12px;align-items:center;padding:12px 10px;border-radius:12px}
+.row:hover{background:var(--surface-2)}
+.row.cur{background:var(--amber-soft)}
+.pos{width:26px;height:26px;border-radius:50%;background:var(--surface-2);color:var(--muted);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.row:first-child .pos{background:var(--good);color:#fff}
+.name{font-weight:650;font-size:15.5px;min-width:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:500;color:var(--muted);background:var(--surface-2);border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.row.cur .tag{background:var(--surface)}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--primary);border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.price{font-weight:750;font-size:18px;text-align:right;white-space:nowrap}
+.price small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.barline{grid-column:2 / 4;height:8px;background:var(--bar-track);border-radius:4px;overflow:hidden}
+.bar{height:100%;background:var(--amber);border-radius:0 4px 4px 0;transition:width .35s ease}
+.row:first-child .bar{background:var(--good)}
+.row.cur .bar{background:var(--primary)}
+.meta{grid-column:2 / 4;font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.meta .save{color:var(--good);font-weight:650}
+.meta .warn{color:var(--primary)}
+.meta a{font-weight:600}
+.more-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+
+/* Productos */
+.pcats{margin:0 0 14px}
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.prod{border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;background:var(--surface);text-decoration:none;color:inherit;transition:transform .15s ease, box-shadow .15s ease}
+.prod:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+.prod .img{background:#fff;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:10px}
+.prod img{max-width:100%;max-height:100%;object-fit:contain}
+.prod .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.prod .pn{font-size:14px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prod .ps{font-size:12.5px;color:var(--muted)}
+.prod .pp{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px}
+.prod .pp b{font-size:14px;color:var(--primary);letter-spacing:1px}
+.prod .pp span{font-size:12.5px;color:var(--muted)}
+.prod .go{font-size:13px;font-weight:700;color:var(--primary)}
+.cta-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.cta-row p{margin:0;font-size:14px;color:var(--muted)}
+
+/* Aparato */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tile{background:var(--amber-soft);border-radius:12px;padding:14px 10px;text-align:center}
+.tile b{display:block;font-size:clamp(20px,3vw,26px);letter-spacing:-.3px}
+.tile small{color:var(--muted);font-size:13px}
+.tile.hot{background:var(--primary);color:#fff}
+.tile.hot small{color:#ffe0d0}
+.facts{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.facts li{padding:10px 12px;background:var(--surface-2);border-radius:10px;font-size:15px}
+
+/* Secciones inferiores */
+.below{display:grid;gap:18px;margin:26px 0}
+details.card summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"+";font-size:22px;color:var(--primary);font-weight:400}
+details.card[open] summary::after{content:"–"}
+.faq h2{font-size:22px;margin:0 0 10px}
+.faq details{border-bottom:1px solid var(--border);padding:12px 0}
+.faq details:last-child{border-bottom:0}
+.faq summary{cursor:pointer;font-weight:650;font-size:16px}
+.faq details p{margin:8px 0 0;color:var(--muted)}
+table.pr{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
+table.pr th,table.pr td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+table.pr th{font-size:12.5px;color:var(--muted);font-weight:600}
+table.pr input{max-width:110px;padding:6px 8px}
+table.pr small{color:var(--muted)}
+.method p,.method li{color:var(--muted);font-size:15px}
+.method ul{padding-left:20px}
+.netlinks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.netlinks a{display:block;border:1px solid var(--border);border-radius:12px;padding:14px;text-decoration:none;color:inherit;background:var(--surface)}
+.netlinks a:hover{border-color:var(--primary)}
+.netlinks b{display:block;color:var(--primary);margin-bottom:2px}
+.netlinks span{font-size:13.5px;color:var(--muted)}
+.bigcta{background:#151312;color:#fff;border-radius:var(--radius);padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.bigcta h2{margin:0 0 4px;font-size:22px}
+.bigcta p{margin:0;color:#cfc6bf}
+footer{border-top:1px solid var(--border);padding:22px 0 30px;font-size:13.5px;color:var(--muted)}
+footer .links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:10px}
+footer .links a.star{font-weight:700}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .inputs{position:static}
+  .prods{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:640px){
+  .summary .kpis{grid-template-columns:1fr 1fr}
+  .summary .kpis .kpi:first-child{grid-column:1 / 3}
+  .prods{grid-template-columns:1fr}
+  .prod{flex-direction:row}
+  .prod .img{width:110px;flex:none;aspect-ratio:auto}
+  .tiles{grid-template-columns:1fr 1fr}
+  .netlinks{grid-template-columns:1fr}
+  .row{padding:12px 6px;gap:4px 10px}
+  .tabs button{padding:9px 13px;font-size:14px}
+  table.pr th:nth-child(3),table.pr td:nth-child(3){display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#C1440E"/><path d="M16 6c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-3-1-6 1-9z" fill="#F2A93B"/></svg>
+      <span>Calculadora de Calefacción<small>una herramienta de CalorBrasa</small></span>
+    </a>
+    <a class="btn" href="https://calorbrasa.github.io/" target="_blank" rel="noopener">Ver estufas en CalorBrasa →</a>
+  </div>
+</header>
+<nav class="net" aria-label="Nuestras webs">
+  <div class="wrap">
+    <a class="star" href="https://calorbrasa.github.io/" target="_blank" rel="noopener">★ CalorBrasa</a>
+    <a class="on" href="#">Calculadora</a>
+    <a href="#" data-web="gasoleo">Alternativas al gasóleo</a>
+    <a href="#" data-web="averias">Averías y seguridad</a>
+    <a href="https://calorbrasa.github.io/comparador.html" target="_blank" rel="noopener">Comparador de estufas</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>¿Cuánto te cuesta calentar tu casa?</h1>
+    <p>Descubre qué estufa te sale más barata para tu casa (eléctrica, de pellets, de leña o de butano) y cuánto ahorras si dejas el gasóleo o la chimenea abierta.</p>
+    <ul class="trust">
+      <li><b>Gratis</b> y sin registro</li>
+      <li>Precios de <b id="asof">septiembre de 2026</b></li>
+      <li><b>4</b> tipos de estufa</li>
+    </ul>
+  </section>
+
+  <div class="tabs" role="tablist" aria-label="Tipo de cálculo">
+    <button role="tab" id="tab-casa" aria-selected="true" aria-controls="modo-casa">Calcular mi casa</button>
+    <button role="tab" id="tab-aparato" aria-selected="false" aria-controls="modo-aparato">¿Cuánto gasta mi aparato?</button>
+  </div>
+
+  <!-- MODO CASA -->
+  <section id="modo-casa" role="tabpanel" aria-labelledby="tab-casa" class="layout">
+    <form class="card inputs" onsubmit="return false" aria-label="Datos de tu casa">
+      <div class="step">
+        <h2><span class="num">1</span>Tu casa</h2>
+        <div class="field">
+          <label for="prov">Provincia</label>
+          <select id="prov"></select>
+          <div class="clima" id="climaBox">
+            <span>Clima: <b id="climaName">Frío</b></span>
+            <button type="button" class="link" id="climaBtn" aria-expanded="false">cambiar</button>
+          </div>
+          <div id="climaPick" hidden>
+            <div class="chips" id="climaChips" role="group" aria-label="Clima"></div>
+            <div class="hint">Si vives en montaña o a más de 800 m, elige un clima más frío que el de tu capital.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="m2">Metros que quieres calentar <output id="m2Out">80 m²</output></label>
+          <input type="range" id="m2" min="10" max="250" step="5" value="80">
+          <div class="chips" id="m2Chips" role="group" aria-label="Superficies típicas">
+            <button type="button" class="chip" data-v="15">Dormitorio 15</button>
+            <button type="button" class="chip" data-v="30">Salón 30</button>
+            <button type="button" class="chip" data-v="80">Piso 80</button>
+            <button type="button" class="chip" data-v="150">Casa 150</button>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">Aislamiento de la vivienda</span>
+          <div class="seg c3" id="insSeg" role="group" aria-label="Aislamiento">
+            <button type="button" data-v="buena">Bueno<small>Reformada o de 2007 en adelante</small></button>
+            <button type="button" data-v="normal">Normal<small>Ventanas dobles, algo de frío</small></button>
+            <button type="button" data-v="mala">Malo<small>Antigua, ventanas simples</small></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <h2><span class="num">2</span>Cómo la usas</h2>
+        <div class="field">
+          <label for="hours">Horas de calefacción al día <output id="hoursOut">7 h</output></label>
+          <input type="range" id="hours" min="1" max="24" step="1" value="7">
+        </div>
+        <div class="field">
+          <label for="months">Meses de frío al año <output id="monthsOut">6 meses</output></label>
+          <input type="range" id="months" min="1" max="9" step="1" value="6">
+          <div class="hint" id="monthsHint">Hemos puesto lo normal en tu zona. Ajústalo si quieres.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <h2><span class="num">3</span>Lo que usas ahora <span class="opt">(opcional)</span></h2>
+        <div class="field">
+          <label for="current">Tu calefacción actual</label>
+          <select id="current"></select>
+          <div class="hint">Así te decimos cuánto ahorrarías cambiando.</div>
+        </div>
+        <div class="field">
+          <span class="lbl">Tu tarifa de luz</span>
+          <div class="seg c3" id="tarSeg" role="group" aria-label="Tarifa de luz">
+            <button type="button" data-v="pvpc">Regulada<small>PVPC</small></button>
+            <button type="button" data-v="libre">Mercado libre<small>Precio fijo</small></button>
+            <button type="button" data-v="nose">No lo sé<small>Usamos una media</small></button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="results" aria-live="polite">
+      <div class="card summary">
+        <div class="kpis">
+          <div class="kpi"><small>La estufa más barata para tu casa</small><b class="hot" id="kBest">–</b></div>
+          <div class="kpi"><small>Potencia necesaria</small><b id="kPow">–</b></div>
+          <div class="kpi"><small>Calor al año</small><b id="kEn">–</b></div>
+        </div>
+        <p class="ctx" id="ctx"></p>
+        <p class="verdict" id="verdict"></p>
+      </div>
+
+      <div class="card">
+        <h2>¿Qué estufa te sale más barata?</h2>
+        <p class="sub" id="rankSub">Gasto estimado de todo el invierno.</p>
+        <ol class="rank" id="rank"></ol>
+        <p class="more-note">No incluye cuotas fijas (potencia de luz, término fijo del gas) ni mantenimiento. “Se paga en” usa un coste de compra e instalación aproximado.</p>
+      </div>
+
+      <div class="card" id="prodCard">
+        <h2 id="prodTitle">Estufas que encajan con tu casa</h2>
+        <p class="sub" id="prodSub">Modelos seleccionados en CalorBrasa por superficie y valoraciones.</p>
+        <div class="chips pcats" id="pcats" role="group" aria-label="Tipo de estufa"></div>
+        <div class="prods" id="prods"></div>
+        <div class="cta-row">
+          <p id="prodNote"></p>
+          <a class="btn" id="prodAll" href="https://calorbrasa.github.io/productos.html" target="_blank" rel="noopener">Ver todas en CalorBrasa →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODO APARATO -->
+  <section id="modo-aparato" role="tabpanel" aria-labelledby="tab-aparato" class="layout" hidden>
+    <form class="card inputs" onsubmit="return false" aria-label="Datos de tu aparato">
+      <div class="step">
+        <h2><span class="num">1</span>Tu aparato</h2>
+        <div class="field">
+          <span class="lbl">Tipo</span>
+          <div class="chips" id="devType" role="group" aria-label="Tipo de aparato"></div>
+        </div>
+        <div class="field">
+          <label for="devPow"><span id="devPowLbl">Potencia</span> <output id="devPowOut"></output></label>
+          <div class="chips" id="devPowChips" role="group" aria-label="Potencias típicas"></div>
+          <input type="number" id="devPow" min="0" step="any" style="margin-top:8px" aria-label="Potencia exacta">
+          <div class="hint" id="devPowHint"></div>
+        </div>
+      </div>
+      <div class="step">
+        <h2><span class="num">2</span>Cómo lo usas</h2>
+        <div class="field">
+          <span class="lbl">Intensidad</span>
+          <div class="seg c3" id="devLvl" role="group" aria-label="Intensidad de uso">
+            <button type="button" data-v="1">A tope<small>100 %</small></button>
+            <button type="button" data-v="0.6">Normal<small>Con termostato</small></button>
+            <button type="button" data-v="0.35">Suave<small>Mantener</small></button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="devHours">Horas al día <output id="devHoursOut">5 h</output></label>
+          <input type="range" id="devHours" min="1" max="24" step="1" value="5">
+        </div>
+        <div class="field">
+          <label for="devDays">Días al mes <output id="devDaysOut">30 días</output></label>
+          <input type="range" id="devDays" min="1" max="31" step="1" value="30">
+        </div>
+      </div>
+    </form>
+
+    <div class="results" aria-live="polite">
+      <div class="card">
+        <h2 id="devTitle">Lo que gasta tu aparato</h2>
+        <p class="sub" id="devSub"></p>
+        <div class="tiles">
+          <div class="tile"><b id="dH">–</b><small>por hora</small></div>
+          <div class="tile"><b id="dD">–</b><small>al día</small></div>
+          <div class="tile"><b id="dM">–</b><small>al mes</small></div>
+          <div class="tile hot"><b id="dS">–</b><small id="dSl">por invierno</small></div>
+        </div>
+        <ul class="facts" id="devFacts"></ul>
+      </div>
+      <div class="card">
+        <h2>El mismo calor con otras estufas</h2>
+        <p class="sub">Coste al mes para dar exactamente el mismo calor que tu aparato.</p>
+        <ol class="rank" id="devRank"></ol>
+        <div class="cta-row">
+          <p id="devCtaTxt">Compara modelos de bajo consumo, con su gasto real.</p>
+          <a class="btn" id="devCta" href="https://calorbrasa.github.io/productos.html" target="_blank" rel="noopener">Ver modelos en CalorBrasa →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="below">
+    <section class="bigcta">
+      <div>
+        <h2>¿Ya sabes qué estufa te conviene?</h2>
+        <p>En CalorBrasa comparas más de 100 estufas: potencia, metros que calientan, gasto diario y opiniones.</p>
+      </div>
+      <a class="btn" href="https://calorbrasa.github.io/comparador.html" target="_blank" rel="noopener">Ir al comparador de CalorBrasa →</a>
+    </section>
+
+    <section class="card faq" id="faq">
+      <h2>Preguntas frecuentes</h2>
+      <div id="faqList"></div>
+    </section>
+
+    <details class="card" id="prices">
+      <summary>Precios usados y fuentes</summary>
+      <p class="sub" style="margin-top:10px">Puedes cambiar cualquier precio por el de tu factura: la calculadora se actualiza al momento.</p>
+      <table class="pr">
+        <thead><tr><th>Energía</th><th>Precio</th><th>Fuente</th></tr></thead>
+        <tbody id="priceRows"></tbody>
+      </table>
+      <p style="margin:12px 0 0"><button type="button" class="link" id="resetPrices">Volver a los precios por defecto</button></p>
+    </details>
+
+    <details class="card method">
+      <summary>Cómo hacemos el cálculo</summary>
+      <ul>
+        <li><b>Potencia necesaria</b> = metros × 95 W/m² × clima (de 0,70 en Canarias a 1,20 en zonas muy frías) × aislamiento (0,75 bueno, 1 normal, 1,35 malo). Equivale a la regla habitual de 1 kW por cada 10 m² en una casa normal.</li>
+        <li><b>Calor del invierno</b> = potencia × horas × días × carga media. La estufa no va siempre a tope: de media trabaja al 35–50 % de su potencia según el clima.</li>
+        <li><b>Gasto</b> = calor ÷ rendimiento × precio de la energía. Rendimientos: eléctrica 100 %, butano 100 %, estufa de pellets 85 %, estufa de leña 70 %, chimenea abierta 20 %, caldera de gasóleo 85 %.</li>
+        <li><b>Energía de cada combustible</b>: pellet 4,8 kWh/kg, leña seca 3,8 kWh/kg, butano 12,7 kWh/kg, gasóleo 10 kWh/litro.</li>
+        <li>Zonas climáticas según el Código Técnico de la Edificación (capital de cada provincia).</li>
+      </ul>
+      <p>Es una estimación orientativa: el gasto real depende de la orientación, la altura de techos, la temperatura que pongas y cómo esté tu casa.</p>
+    </details>
+
+    <section>
+      <h2 style="font-size:20px;margin:0">Amplía información</h2>
+      <div class="netlinks">
+        <a href="#" data-web="gasoleo"><b>Alternativas al gasóleo</b><span>Precio del calor hoy y cuánto ahorras si dejas el gasóleo.</span></a>
+        <a href="#" data-web="averias"><b>Averías y seguridad</b><span>Estufa de pellets que no enciende, butano en casa y más.</span></a>
+        <a href="https://calorbrasa.github.io/asistente.html" target="_blank" rel="noopener"><b>¿Qué estufa me compro?</b><span>El asistente de CalorBrasa te recomienda modelos en 1 minuto.</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a class="star" href="https://calorbrasa.github.io/" target="_blank" rel="noopener">★ CalorBrasa</a>
+      <a href="https://calorbrasa.github.io/categoria/estufas-de-pellets.html" target="_blank" rel="noopener">Estufas de pellets</a>
+      <a href="https://calorbrasa.github.io/categoria/estufas-de-lena.html" target="_blank" rel="noopener">Estufas de leña</a>
+      <a href="https://calorbrasa.github.io/categoria/calefactores-electricos.html" target="_blank" rel="noopener">Estufas eléctricas</a>
+      <a href="https://calorbrasa.github.io/categoria/calefactores-de-gas.html" target="_blank" rel="noopener">Estufas de butano</a>
+      <a href="https://calorbrasa.github.io/categoria/radiadores-electricos.html" target="_blank" rel="noopener">Radiadores</a>
+      <a href="#" data-web="gasoleo">Alternativas al gasóleo</a>
+      <a href="#" data-web="averias">Averías y seguridad</a>
+    </div>
+    <p>Resultados orientativos. Los enlaces a CalorBrasa llevan a productos de Amazon con enlace de afiliado: si compras, CalorBrasa puede recibir una comisión sin coste extra para ti. © 2026 CalorBrasa.</p>
+  </div>
+</footer>
+
+<script>
+/* ============ DATOS ============ */
+const SITE = "https://calorbrasa.github.io/";
+const CAT_SLUG = { pellets: "estufas-de-pellets", "lena-biomasa": "estufas-de-lena", electricos: "calefactores-electricos", gas: "calefactores-de-gas", radiadores: "radiadores-electricos" };
+const CAT_URL = c => SITE + "categoria/" + (CAT_SLUG[c] || "") + ".html";
+const PROD_URL = id => SITE + "producto/" + encodeURIComponent(id) + ".html";
+// Webs hermanas (poner aquí las URLs cuando estén publicadas)
+const WEBS = { gasoleo: "#", averias: "#" };
+
+let PRODUCTS = [{"id":"pellets-stufe-california-blanco","c":"pellets","n":"STUFE A PELLET ITALIA California Estufa de Pellets 8kW Blanco","kw":8.2,"m2":70,"p":724,"r":4.6,"rc":47,"img":"https://m.media-amazon.com/images/I/71pEs3MM1fL._AC_SL1500_.jpg"},{"id":"pellets-stufe-california-negro","c":"pellets","n":"STUFE A PELLET ITALIA California Estufa de Pellets 8kW Negro","kw":8.2,"m2":60,"p":724,"r":4.5,"rc":88,"img":"https://m.media-amazon.com/images/I/61HW1WHj21L._AC_SL1500_.jpg"},{"id":"pellets-eider-king10-negro","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets KING 10 9,24kW Negro","kw":9.24,"m2":95,"p":870,"r":5.0,"rc":2,"img":"https://m.media-amazon.com/images/I/51GkSxNDWUL._AC_SL1500_.jpg"},{"id":"pellets-eider-king10-blanco","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets KING 10 9,24kW Blanco","kw":9.24,"m2":95,"p":870,"r":5.0,"rc":2,"img":"https://m.media-amazon.com/images/I/513FzdFZNCL._AC_SL1500_.jpg"},{"id":"pellets-eider-power9plus-blanco","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets POWER 9 PLUS 9kW Blanco","kw":9,"m2":84,"p":799,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51onaGRdUVL._AC_SL1500_.jpg"},{"id":"pellets-eider-venere-bronce","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets VENERE 10,8kW Bronce","kw":10.8,"m2":126,"p":899,"r":4.0,"rc":0,"img":"https://m.media-amazon.com/images/I/61pfFdujyRL._AC_SL1500_.jpg"},{"id":"pellets-stufe-california8-rojo","c":"pellets","n":"STUFE A PELLET ITALIA California Estufa de Pellets 8kW Rojo","kw":8.2,"m2":80,"p":724,"r":4.5,"rc":88,"img":"https://m.media-amazon.com/images/I/61w-0niiPkL._AC_SL1500_.jpg"},{"id":"pellets-eider-gyda-negro","c":"pellets","n":"EIDER BIOMASA Estufa Pellets Canalizada GYDA 14,3kW Negro","kw":14.3,"m2":136,"p":1329.08,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51gRW2hNtuL._AC_SL1500_.jpg"},{"id":"pellets-eider-gyda-blanco","c":"pellets","n":"EIDER BIOMASA Estufa Pellets Canalizada GYDA 14,3kW Blanco","kw":14.3,"m2":136,"p":1329.08,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51CG1CPp6AL._AC_SL1500_.jpg"},{"id":"pellets-eider-elite7-negro","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets ELITE 7 7,01kW Negro","kw":7.01,"m2":70,"p":730.07,"r":1.0,"rc":1,"img":"https://m.media-amazon.com/images/I/510Yup5Ro-L._AC_SL1500_.jpg"},{"id":"pellets-eider-andromeda9-negro","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets ANDRÓMEDA 9 8,99kW Negro","kw":8.99,"m2":84,"p":755.39,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/51RRDW0a+XL._AC_SL1500_.jpg"},{"id":"pellets-eider-marte-blanco","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets MARTE 8,55kW Blanco","kw":8.55,"m2":101,"p":899,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/615hez0Ln5L._AC_SL1500_.jpg"},{"id":"pellets-eider-marte-bronce","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets MARTE 8,55kW Bronce","kw":8.55,"m2":101,"p":899,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/61ZG3+-y3pL._AC_SL1500_.jpg"},{"id":"pellets-eider-slimplus-blanco","c":"pellets","n":"EIDER BIOMASA Estufa Pellets Canalizada SLIM PLUS 7,98kW","kw":7.98,"m2":74,"p":990,"r":1.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51bIiiXsP0L._AC_SL1500_.jpg"},{"id":"pellets-joima-naturstyle-negro","c":"pellets","n":"JOIMA Estufa de Pellets sin Electricidad NATUR STYLE 8,25kW Negro","kw":8.25,"m2":75,"p":950,"r":4.9,"rc":18,"img":"https://m.media-amazon.com/images/I/81-fL9EbXFL._AC_SL1500_.jpg"},{"id":"pellets-stufe-colorado15-blanco","c":"pellets","n":"STUFE A PELLET ITALIA Colorado 15kW Blanco","kw":14.5,"m2":140,"p":1334,"r":4.7,"rc":19,"img":"https://m.media-amazon.com/images/I/61ouszER1iL._AC_SL1500_.jpg"},{"id":"pellets-eider-insert8-negro","c":"pellets","n":"EIDER BIOMASA Insertable de Pellets INSERT 8 7,98kW Negro","kw":8.3,"m2":74,"p":953.52,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51UGDAzCJpL._AC_SL1500_.jpg"},{"id":"pellets-stufe-colonna10-blanco","c":"pellets","n":"STUFE A PELLET ITALIA Colonna 8kW Blanco","kw":7.6,"m2":80,"p":1084,"r":5.0,"rc":3,"img":"https://m.media-amazon.com/images/I/61TWSbAa51L._AC_SL1500_.jpg"},{"id":"pellets-stufe-marmolada14-blanco","c":"pellets","n":"STUFE A PELLET ITALIA Marmolada 14kW Blanco","kw":14,"m2":130,"p":1354,"r":4.3,"rc":27,"img":"https://m.media-amazon.com/images/I/61rQ2Lq772L._AC_SL1500_.jpg"},{"id":"pellets-stufe-california10-wifi-blanco","c":"pellets","n":"STUFE A PELLET ITALIA California WiFi 10kW Blanco","kw":9.9,"m2":80,"p":1084,"r":4.2,"rc":12,"img":"https://m.media-amazon.com/images/I/71pEs3MM1fL._AC_SL1500_.jpg"},{"id":"pellets-stufe-alaska10-negro","c":"pellets","n":"STUFE A PELLET ITALIA Alaska 10kW Negro","kw":10,"m2":85,"p":1002,"r":4.7,"rc":6,"img":"https://m.media-amazon.com/images/I/61NfzxKDt1L._AC_SL1500_.jpg"},{"id":"pellets-eider-insertcanada11-negro","c":"pellets","n":"EIDER BIOMASA Insertable de Pellets Insert CANADÁ 11 10,9kW Negro","kw":10.9,"m2":95,"p":1182.26,"r":1.5,"rc":2,"img":"https://m.media-amazon.com/images/I/51XKvVTPx3L._AC_SL1500_.jpg"},{"id":"pellets-stufe-california10-blanco","c":"pellets","n":"STUFE A PELLET ITALIA California 10kW Blanco","kw":9.9,"m2":80,"p":954,"r":4.0,"rc":49,"img":"https://m.media-amazon.com/images/I/71pEs3MM1fL._AC_SL1500_.jpg"},{"id":"pellets-stufe-california8wifi-blanco","c":"pellets","n":"STUFE A PELLET ITALIA California WiFi 8kW Blanco","kw":8,"m2":70,"p":1024,"r":4.5,"rc":7,"img":"https://m.media-amazon.com/images/I/71pEs3MM1fL._AC_SL1500_.jpg"},{"id":"pellets-stufe-canada12-negro","c":"pellets","n":"STUFE A PELLET ITALIA Canada 12kW Negro","kw":12.3,"m2":120,"p":1184,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/61rZwx3d+XL._AC_SL1500_.jpg"},{"id":"pellets-stufe-marmolada14wifi-negro","c":"pellets","n":"STUFE A PELLET ITALIA Marmolada 14kW WiFi Negro","kw":14,"m2":130,"p":1510,"r":5.0,"rc":7,"img":"https://m.media-amazon.com/images/I/61JNxbn05GL._AC_SL1500_.jpg"},{"id":"pellets-stufe-marmolada14canalizado-blanco","c":"pellets","n":"STUFE A PELLET ITALIA Marmolada 14kW Canalizado Blanco","kw":14,"m2":130,"p":1474,"r":4.0,"rc":24,"img":"https://m.media-amazon.com/images/I/61rQ2Lq772L._AC_SL1500_.jpg"},{"id":"pellets-flamenergie-13kw-rojo","c":"pellets","n":"FLAM ENERGIE Estufa de Pellets sin Electricidad 13kW Rojo","kw":13,"m2":130,"p":850,"r":3.9,"rc":2,"img":"https://m.media-amazon.com/images/I/61kEzj8EG8L._AC_SL1278_.jpg"},{"id":"pellets-stufe-colonna10wifi-blanco","c":"pellets","n":"STUFE A PELLET ITALIA Colonna 8kW WiFi Blanco","kw":8,"m2":80,"p":1244,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/61TWSbAa51L._AC_SL1500_.jpg"},{"id":"pellets-stufe-alaska10-blanco","c":"pellets","n":"STUFE A PELLET ITALIA Alaska 10kW Blanco","kw":10,"m2":80,"p":1002,"r":4.0,"rc":16,"img":"https://m.media-amazon.com/images/I/61w1Rs5RpvL._AC_SL1500_.jpg"},{"id":"pellets-stufe-california8wifi-rojo","c":"pellets","n":"STUFE A PELLET ITALIA California WiFi 8kW Rojo","kw":8.2,"m2":70,"p":1024,"r":4.0,"rc":4,"img":"https://m.media-amazon.com/images/I/61w-0niiPkL._AC_SL1500_.jpg"},{"id":"pellets-stufe-siberia15-negro","c":"pellets","n":"STUFE A PELLET ITALIA Siberia Aria New 15kW Negro","kw":15,"m2":140,"p":1424,"r":4.9,"rc":23,"img":"https://m.media-amazon.com/images/I/71K14raZoyL._AC_SL1500_.jpg"},{"id":"pellets-stufe-marmolada14canalizado-negro","c":"pellets","n":"STUFE A PELLET ITALIA Marmolada 14kW Canalizado Negro","kw":13.85,"m2":130,"p":1474,"r":5.0,"rc":5,"img":"https://m.media-amazon.com/images/I/61JNxbn05GL._AC_SL1500_.jpg"},{"id":"pellets-ecomont-doblemotor12-blanco","c":"pellets","n":"Estufa de Pellets Doble Motor 12kW Blanco (compatible hueso de aceituna)","kw":12,"m2":120,"p":1445,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/51gWIGMTX1L._AC_SL1500_.jpg"},{"id":"pellets-stufe-canada12-blanco","c":"pellets","n":"STUFE A PELLET ITALIA Canada 12kW Blanco","kw":12.3,"m2":120,"p":1184,"r":3.5,"rc":8,"img":"https://m.media-amazon.com/images/I/61RDNMM9EyL._AC_SL1500_.jpg"},{"id":"pellets-eider-giove-bronce","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets GIOVE 10,8kW Bronce","kw":10.8,"m2":126,"p":899,"r":4.5,"rc":2,"img":"https://m.media-amazon.com/images/I/61D2nFT-zZL._AC_SL1500_.jpg"},{"id":"pellets-eider-maximafundicion-negro","c":"pellets","n":"EIDER BIOMASA Estufa de Pellets MÁXIMA FUNDICIÓN 10kW Negro","kw":10,"m2":92,"p":1905.04,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/61kYePSx2EL._AC_SL1500_.jpg"},{"id":"lena-eider-quartz-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña con Horno QUARTZ 9,7kW Negro","kw":9.7,"m2":96,"p":487.08,"r":4.1,"rc":20,"img":"https://m.media-amazon.com/images/I/51KDCi6O0hL._AC_SL1500_.jpg"},{"id":"lena-eider-samira-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña SAMIRA 7kW Negro","kw":7,"m2":60,"p":406.78,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51hjy1XUkSL._AC_SL1500_.jpg"},{"id":"electricos-homcom-chimenea-1000-2000w","c":"electricos","n":"HOMCOM Chimenea Eléctrica de Pie 1000W/2000W Negro","kw":2,"m2":30,"p":62.99,"r":4.4,"rc":290,"img":"https://m.media-amazon.com/images/I/71N-QZR62+L._AC_SL1500_.jpg"},{"id":"electricos-thinia-cuarzo-1200w","c":"electricos","n":"THINIA HOME Estufa de Cuarzo 1200W Blanco","kw":1.2,"m2":20,"p":19.91,"r":4.4,"rc":188,"img":"https://m.media-amazon.com/images/I/51EjM60orsL._AC_SL1500_.jpg"},{"id":"electricos-midea-convector-2000w","c":"electricos","n":"MIDEA Convector Eléctrico Bajo Consumo 2000W Blanco","kw":2,"m2":20,"p":35.99,"r":4.2,"rc":284,"img":"https://m.media-amazon.com/images/I/51UZlFzaP-L._AC_SL1500_.jpg"},{"id":"electricos-cecotec-readywarm6550-turbo","c":"electricos","n":"Cecotec Ready Warm 6550 Turbo Design Convector 2000W","kw":2,"m2":15,"p":39.9,"r":4.1,"rc":878,"img":"https://m.media-amazon.com/images/I/61F1x4mVOLL._AC_SL1500_.jpg"},{"id":"electricos-briebe-convector","c":"electricos","n":"briebe Radiador Convector Eléctrico 2000W Blanco","kw":2,"m2":20,"p":39.92,"r":4.3,"rc":534,"img":"https://m.media-amazon.com/images/I/61jHmGxwXIL._AC_SL1500_.jpg"},{"id":"electricos-adler-ad7755","c":"electricos","n":"Adler AD 7755 Chimenea Eléctrica LED Efecto Llama 3D","kw":2,"m2":20,"p":82.79,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/617x34jjdrL._AC_SL1500_.jpg"},{"id":"electricos-orbegozo-bp5003","c":"electricos","n":"Orbegozo BP 5003 Estufa de Cuarzo 1200W Blanco","kw":1.2,"m2":12,"p":19.98,"r":4.5,"rc":1064,"img":"https://m.media-amazon.com/images/I/51AfwHQvCLL._AC_SL1000_.jpg"},{"id":"electricos-kesser-ventilador-2000w","c":"electricos","n":"KESSER Estufa Eléctrica con Ventilador 2000W Efecto Llama Negro","kw":2,"m2":20,"p":97.8,"r":4.1,"rc":1940,"img":"https://m.media-amazon.com/images/I/81CIQb8hTdL._AC_SL1500_.jpg"},{"id":"electricos-thulos-cuarzo-3tubos","c":"electricos","n":"Thulos Estufa de Cuarzo 3 Tubos 1200W Blanco","kw":1.2,"m2":12,"p":20.5,"r":4.2,"rc":105,"img":"https://m.media-amazon.com/images/I/51zD3x0jG6L._AC_SL1033_.jpg"},{"id":"electricos-dreo-2000w","c":"electricos","n":"Dreo Calefactor Eléctrico 2000W con Oscilación 70°","kw":2,"m2":25,"p":73.01,"r":4.6,"rc":4771,"img":"https://m.media-amazon.com/images/I/71hF5slnXpL._AC_SL1500_.jpg"},{"id":"electricos-dreo-1500w","c":"electricos","n":"Dreo Calefactor Eléctrico Cerámico 1500W Blanco","kw":1.5,"m2":20,"p":44.99,"r":4.7,"rc":10231,"img":"https://m.media-amazon.com/images/I/71BpxOdUquL._AC_SL1300_.jpg"},{"id":"electricos-ardes-halo12","c":"electricos","n":"ARDES AR454B HALO 12 Estufa Halógena Oscilante","kw":1.2,"m2":12,"p":27.95,"r":3.8,"rc":809,"img":"https://m.media-amazon.com/images/I/816wt6AkuAL._AC_SL1500_.jpg"},{"id":"electricos-orbegozo-bb5000","c":"electricos","n":"Orbegozo BB 5000 Estufa de Cuarzo para Baño 1200W Plata","kw":1.2,"m2":10,"p":20.9,"r":4.2,"rc":516,"img":"https://m.media-amazon.com/images/I/51yFFvWgoaL._AC_SL1000_.jpg"},{"id":"electricos-maxstar-cuarzo","c":"electricos","n":"Max Star Estufa Eléctrica de Cuarzo Infrarrojo 1200W Blanco","kw":1.2,"m2":12,"p":24.0,"r":4.1,"rc":300,"img":"https://m.media-amazon.com/images/I/51-VJo+DDCL._AC_SL1000_.jpg"},{"id":"electricos-dreo-ceramico-1500w-oro","c":"electricos","n":"Dreo Calefactor Cerámico de Bajo Consumo 1500W Oro","kw":1.5,"m2":15,"p":49.99,"r":4.7,"rc":10231,"img":"https://m.media-amazon.com/images/I/71rcaf+x8sL._AC_SL1300_.jpg"},{"id":"electricos-adler-ad7709","c":"electricos","n":"Adler AD7709 Estufa Eléctrica de Cuarzo Portátil Blanco","kw":0.8,"m2":8,"p":16.14,"r":4.1,"rc":500,"img":"https://m.media-amazon.com/images/I/81HjU9mHGbL._AC_SL1500_.jpg"},{"id":"electricos-homcom-chimenea-portatil-1000-2000w","c":"electricos","n":"HOMCOM Chimenea Eléctrica Portátil 1000W/2000W 15-20m² Negro","kw":2,"m2":20,"p":75.99,"r":4.3,"rc":674,"img":"https://m.media-amazon.com/images/I/71GUvBhLfFL._AC_SL1500_.jpg"},{"id":"electricos-cecotec-readywarm5200-ceramic","c":"electricos","n":"Cecotec Ready Warm 5200 Box Ceramic 2000W Calefactor de Pared","kw":2,"m2":20,"p":44.9,"r":4.2,"rc":2735,"img":"https://m.media-amazon.com/images/I/51uyleiPw4L._AC_SL1500_.jpg"},{"id":"electricos-homcom-chimenea-600-1200w","c":"electricos","n":"HOMCOM Chimenea Eléctrica Portátil 600W/1200W 13-18m² Negro","kw":1.2,"m2":18,"p":58.99,"r":4.2,"rc":171,"img":"https://m.media-amazon.com/images/I/61FQ3TybL5L._AC_SL1500_.jpg"},{"id":"electricos-adler-ad7754","c":"electricos","n":"Adler AD 7754 Chimenea Eléctrica Efecto Llama 3D 1800W","kw":1.8,"m2":18,"p":60.83,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/71W3emduvtL._AC_SL1500_.jpg"},{"id":"electricos-kaminio-leni","c":"electricos","n":"KAMINIO Chimenea Eléctrica Leni con Calefacción Efecto Llama 3D Negro","kw":2,"m2":20,"p":119.9,"r":4.6,"rc":157,"img":"https://m.media-amazon.com/images/I/81QFVvNZAiL._AC_SL1500_.jpg"},{"id":"electricos-orbegozo-bb5002","c":"electricos","n":"Orbegozo BB 5002 Estufa Eléctrica de Cuarzo para Baño 1200W Blanco","kw":1.2,"m2":10,"p":32.09,"r":4.4,"rc":1691,"img":"https://m.media-amazon.com/images/I/612Off5u8GL._AC_SL1417_.jpg"},{"id":"electricos-tresko-smarthome","c":"electricos","n":"TRESKO Chimenea Eléctrica 2000W Smart Home WiFi App y Mando","kw":2,"m2":20,"p":144.79,"r":4.4,"rc":201,"img":"https://m.media-amazon.com/images/I/817ReQQHHxL._AC_SL1500_.jpg"},{"id":"electricos-cecotec-curvedflames-2600","c":"electricos","n":"Cecotec Chimenea Eléctrica Ready Warm 2600 Curved Flames 2000W","kw":2,"m2":25,"p":119.0,"r":4.1,"rc":130,"img":"https://m.media-amazon.com/images/I/513qBxaewVL._AC_SL1000_.jpg"},{"id":"electricos-orbegozo-bp5000","c":"electricos","n":"Orbegozo BP 5000 Estufa de Cuarzo 800W Blanco","kw":0.8,"m2":8,"p":19.99,"r":3.6,"rc":441,"img":"https://m.media-amazon.com/images/I/616q+l+FZrL._AC_SL1000_.jpg"},{"id":"electricos-cecotec-2000flames-pie","c":"electricos","n":"Cecotec Chimenea Eléctrica de Pie ReadyWarm 2000 Flames","kw":2,"m2":25,"p":54.9,"r":4.2,"rc":394,"img":"https://m.media-amazon.com/images/I/51syEyn0a7L._AC_SL1000_.jpg"},{"id":"electricos-orbegozo-bp5007","c":"electricos","n":"Orbegozo BP 5007 Estufa de Cuarzo 800W Blanco","kw":0.8,"m2":8,"p":14.79,"r":4.1,"rc":1542,"img":"https://m.media-amazon.com/images/I/61uaakyu-JL._AC_SL1000_.jpg"},{"id":"electricos-deuba-monzana-chimenea","c":"electricos","n":"DEUBA Monzana Chimenea Eléctrica de Pie Efecto Llama LED 30m²","kw":2,"m2":30,"p":79.99,"r":4.4,"rc":1758,"img":"https://m.media-amazon.com/images/I/51u6+wav-cL._AC_SL1000_.jpg"},{"id":"electricos-kaminio-marlonpro50","c":"electricos","n":"KAMINIO Marlon Pro 50 Chimenea Eléctrica 3 en 1 Negro","kw":1.8,"m2":30,"p":369.0,"r":4.8,"rc":855,"img":"https://m.media-amazon.com/images/I/81AjzOvQG-L._AC_SL1500_.jpg"},{"id":"electricos-orbegozo-fhr2040","c":"electricos","n":"Orbegozo FHR 2040 Calefactor Eléctrico Cerámico Profesional 2000W","kw":2,"m2":20,"p":29.98,"r":4.4,"rc":870,"img":"https://m.media-amazon.com/images/I/61sfS62tzdL._AC_SL1000_.jpg"},{"id":"electricos-homcom-chimenea-pie-v2","c":"electricos","n":"HOMCOM Chimenea Eléctrica de Pie 1000W/2000W 15-30m² Negro","kw":2,"m2":30,"p":71.99,"r":4.2,"rc":336,"img":"https://m.media-amazon.com/images/I/71KlUuidVaL._AC_SL1500_.jpg"},{"id":"electricos-amazonbasics-ceramico","c":"electricos","n":"Amazon Basics Calefactor de Cerámica 1800W Plateado","kw":1.8,"m2":18,"p":16.5,"r":4.4,"rc":605,"img":"https://m.media-amazon.com/images/I/81-EgJSAtyL._AC_SL1500_.jpg"},{"id":"electricos-relaxdays-vintage","c":"electricos","n":"Relaxdays Chimenea Eléctrica Vintage con Efecto de Llamas Negro","kw":2,"m2":20,"p":67.99,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/81rBexqy5iL._AC_SL1500_.jpg"},{"id":"electricos-orbegozo-fhr3050a","c":"electricos","n":"Orbegozo FHR 3050 A Calefactor Eléctrico Cerámico Profesional 3000W","kw":3,"m2":30,"p":59.5,"r":4.2,"rc":1346,"img":"https://m.media-amazon.com/images/I/81ZFWVUsifL._AC_SL1500_.jpg"},{"id":"electricos-cecotec-readywarm2050-dual","c":"electricos","n":"Cecotec Calefactor Eléctrico ReadyWarm 2050 Max Dual 2000W Blanco","kw":2,"m2":20,"p":18.93,"r":4.0,"rc":884,"img":"https://m.media-amazon.com/images/I/71hxK-GQ41L._AC_SL1500_.jpg"},{"id":"electricos-orbegozo-sp6000","c":"electricos","n":"Orbegozo SP 6000 Calefactor de Baño 2000W Blanco","kw":2,"m2":15,"p":53.49,"r":4.3,"rc":2773,"img":"https://m.media-amazon.com/images/I/41nKJQS5OBL._AC_SL1000_.jpg"},{"id":"electricos-rowenta-intensecomfortaqua","c":"electricos","n":"Rowenta Intense Comfort Aqua SO6550 Calefactor de Baño 2400W Negro","kw":2.4,"m2":40,"p":74.99,"r":4.4,"rc":8804,"img":"https://m.media-amazon.com/images/I/61JVfzHB3ZL._AC_SL1500_.jpg"},{"id":"lena-eider-lux-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña con Horno LUX 12,44kW Negro","kw":12.44,"m2":96,"p":568.2,"r":3.7,"rc":4,"img":"https://m.media-amazon.com/images/I/71j39AwXy8L._AC_SL1500_.jpg"},{"id":"lena-eider-altair-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña ALTAIR 11,8kW Hierro Fundido Negro","kw":11.8,"m2":92,"p":740.17,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/51WxO-8mVIL._AC_SL1500_.jpg"},{"id":"lena-eider-linamesquina-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña LINAM ESQUINA 13,85kW Negro","kw":13.85,"m2":126,"p":601.96,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/61lRSEcOtHL._AC_SL1500_.jpg"},{"id":"lena-eider-insertastonhorno-negro","c":"lena-biomasa","n":"EIDER BIOMASA Insertable de Leña Insert Aston Horno 13,1kW Negro","kw":13.1,"m2":102,"p":802.28,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/61NvIbym57L._AC_SL1500_.jpg"},{"id":"lena-eider-rusticaexteriores-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña RÚSTICA EXTERIORES 10,94kW Negro","kw":10.94,"m2":85,"p":197.31,"r":3.9,"rc":29,"img":"https://m.media-amazon.com/images/I/613QZcBPC8L._AC_SL1500_.jpg"},{"id":"lena-eider-niza-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña NIZA 9,7kW Negro","kw":9.7,"m2":70,"p":350.8,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/515DPW+7otL._AC_SL1500_.jpg"},{"id":"lena-eider-lucerna-mixta-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa Mixta de Leña y Pellets LUCERNA con Horno 10,45kW","kw":10.45,"m2":82,"p":993.59,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/51YlaiW-VzL._AC_SL1500_.jpg"},{"id":"lena-eider-royce-negro","c":"lena-biomasa","n":"EIDER BIOMASA Estufa de Leña Royce 11,8kW Hierro Fundido Negro","kw":11.8,"m2":85,"p":563.34,"r":2.6,"rc":3,"img":"https://m.media-amazon.com/images/I/51WxO-8mVIL._AC_SL1500_.jpg"},{"id":"lena-balami-antracita","c":"lena-biomasa","n":"MAESTRO FERRETERO Estufa de Leña BALAMI 7kW Antracita","kw":7,"m2":70,"p":776.0,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/41h6vLk6acL._AC_.jpg"},{"id":"lena-prity-fgw15-negro","c":"lena-biomasa","n":"Prity FG W15 Estufa de Leña con Horno y Caldera de Agua 15kW","kw":15,"m2":150,"p":949.0,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/51yZlvrsA8L._AC_SL1000_.jpg"},{"id":"lena-bronpi-altea-rincon","c":"lena-biomasa","n":"BRONPI ALTEA Estufa de Leña de Fundición de Rincón","kw":8,"m2":80,"p":1187.9,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/61fI2DKj+5L._AC_SL1000_.jpg"},{"id":"lena-outinfire-p7pb-gris","c":"lena-biomasa","n":"OutInFire Estufa de Leña P7 PB 10,5kW Gris Oscuro","kw":10.5,"m2":105,"p":1350.0,"r":4.6,"rc":21,"img":"https://m.media-amazon.com/images/I/7190Sj8I9qL._AC_SL1500_.jpg"},{"id":"lena-lnee-conhorno14-negro","c":"lena-biomasa","n":"LNEE Estufa de Leña con Horno 14kW Negro","kw":14,"m2":79,"p":699.0,"r":4.1,"rc":19,"img":"https://m.media-amazon.com/images/I/617ISKhGLgL._AC_SL1500_.jpg"},{"id":"lena-bilake-volcanobasexl-negro","c":"lena-biomasa","n":"Bilake Estufa de Leña Volcano Base XL 14,3kW Negro","kw":14.3,"m2":143,"p":563.34,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/31SS4VjDFpL._AC_SY300_SX300_QL70_ML2_.jpg"},{"id":"lena-prity1-10kw-negro","c":"lena-biomasa","n":"Prity 1 Estufa de Leña con Horno 10kW Negro","kw":10,"m2":100,"p":619.0,"r":4.3,"rc":128,"img":"https://m.media-amazon.com/images/I/61OmH02KlFL._AC_SL1352_.jpg"},{"id":"lena-prity-fgw20-negro","c":"lena-biomasa","n":"Prity FG W20 Estufa de Leña con Horno y Caldera de Agua 20kW","kw":20,"m2":200,"p":1399.0,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/61raoFmtOJL._AC_SL1500_.jpg"},{"id":"lena-prensastove-etna-antracita","c":"lena-biomasa","n":"PRENSA STOVE Estufa de Leña con Horno ETNA 13kW Antracita","kw":13,"m2":130,"p":389.0,"r":4.6,"rc":17,"img":"https://m.media-amazon.com/images/I/51cOSD+XRhL._AC_SL1500_.jpg"},{"id":"lena-nemaxx-h8-negro","c":"lena-biomasa","n":"NEMAXX H8 Estufa de Leña Ventilada 7,6kW Negro","kw":7.6,"m2":90,"p":499.9,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51htO72HL4L._AC_SL1500_.jpg"},{"id":"lena-verso3-negro","c":"lena-biomasa","n":"CasaNovae24 Estufa de Leña Verso 3 5kW Negro","kw":5,"m2":30,"p":499.0,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/51D69Kb-5UL._AC_SL1404_.jpg"},{"id":"lena-minisp-otosystem-negro","c":"lena-biomasa","n":"OtoSystem Estufa de Leña Mini SP 5,2kW Negro","kw":5.2,"m2":52,"p":399.0,"r":4.4,"rc":33,"img":"https://m.media-amazon.com/images/I/51x1tRg2SnL._AC_SL1200_.jpg"},{"id":"lena-prity-k1-9kw-negro","c":"lena-biomasa","n":"Prity K1 Estufa de Leña 9kW Negro","kw":9,"m2":90,"p":379.0,"r":4.7,"rc":4,"img":"https://m.media-amazon.com/images/I/51pCCG6X9eL._AC_SL1280_.jpg"},{"id":"lena-prakti-lux-prometey11-negro","c":"lena-biomasa","n":"Prometey Estufa de Leña Prakti Lux con Horno 11kW Negro","kw":11,"m2":110,"p":649.0,"r":3.8,"rc":19,"img":"https://m.media-amazon.com/images/I/713rRDQz88L._AC_SL1500_.jpg"},{"id":"lena-juanpanadero-bayonne-negro","c":"lena-biomasa","n":"JUAN PANADERO Bayonne Eco Design Estufa de Leña 8kW Negro","kw":8,"m2":112,"p":680.0,"r":4.5,"rc":2,"img":"https://m.media-amazon.com/images/I/81T10szQr+L._AC_SL1500_.jpg"},{"id":"lena-prity-pm3e-negro","c":"lena-biomasa","n":"Prity PM3 E Estufa de Leña Panorámica de Cristal 3 Lados 10kW","kw":10,"m2":100,"p":1299.0,"r":5.0,"rc":0,"img":"https://m.media-amazon.com/images/I/51+wRvs3qSL._AC_SL1200_.jpg"},{"id":"lena-sannover-118kw-negro","c":"lena-biomasa","n":"Sannover Estufa de Leña 11,8kW Negro","kw":11.8,"m2":118,"p":459.99,"r":4.0,"rc":52,"img":"https://m.media-amazon.com/images/I/612g5i0xF8L._AC_SL1500_.jpg"},{"id":"lena-prity-k1-95kw-negro","c":"lena-biomasa","n":"Prity K1 Estufa de Leña 9,5kW","kw":9.5,"m2":52,"p":389.0,"r":4.1,"rc":41,"img":"https://m.media-amazon.com/images/I/51ZUBh1jDlL._AC_SL1080_.jpg"},{"id":"gas-orbegozo-hce-73","c":"gas","n":"Orbegozo HCE 73 Estufa de Gas Butano Panel Cerámico 4200W","kw":4.2,"m2":40,"p":84.98,"r":4.0,"rc":2110,"img":"https://m.media-amazon.com/images/I/51gwCDqb8RL._AC_SL1000_.jpg"},{"id":"gas-orbegozo-hbf-90","c":"gas","n":"Orbegozo HBF 90 Estufa de Gas Butano Llama Azul 4200W","kw":4.2,"m2":35,"p":111.54,"r":4.2,"rc":8412,"img":"https://m.media-amazon.com/images/I/61Bs5divE9L._AC_SL1000_.jpg"},{"id":"gas-cecotec-ready-warm-4000","c":"gas","n":"Cecotec Ready Warm 4000 Slim Fold Estufa de Gas Butano Plegable 4200W","kw":4.2,"m2":30,"p":85.49,"r":3.9,"rc":3126,"img":"https://m.media-amazon.com/images/I/51bcEMVYFSL._AC_SL1000_.jpg"},{"id":"gas-cecotec-readywarm4500-negro","c":"gas","n":"Cecotec Estufa de Gas Llama Azul Plegable ReadyWarm 4500 BlueFlame Foldable","kw":4.2,"m2":30,"p":79.9,"r":4.0,"rc":285,"img":"https://m.media-amazon.com/images/I/71Qqc9cMloL._AC_SL1500_.jpg"},{"id":"gas-evocamp-mini-camping","c":"gas","n":"EVOCAMP Mini Calefactor de Gas Butano Portátil 1,7kW","kw":1.7,"m2":17,"p":39.99,"r":4.2,"rc":456,"img":"https://m.media-amazon.com/images/I/71ePHXWAEkL._AC_SL1500_.jpg"},{"id":"gas-jupplies-plegable-4200w","c":"gas","n":"JUPPLIES Estufa de Gas Butano Plegable 4200W","kw":4.2,"m2":80,"p":79.99,"r":4.0,"rc":351,"img":"https://m.media-amazon.com/images/I/81vfB0XL8PL._AC_SL1500_.jpg"},{"id":"gas-cecotec-readywarm4200-negro","c":"gas","n":"Cecotec Estufa de Gas Llama Azul Plegable ReadyWarm 4200 BlueFlame Foldable","kw":4.2,"m2":30,"p":79.89,"r":2.9,"rc":649,"img":"https://m.media-amazon.com/images/I/716alj2XPLL._AC_SL1500_.jpg"},{"id":"gas-orbegozo-hbf100-negro","c":"gas","n":"Orbegozo HBF 100 Estufa de Gas Butano Llama Azul 3800W","kw":3.8,"m2":38,"p":179.0,"r":3.8,"rc":1294,"img":"https://m.media-amazon.com/images/I/41TQk2-+FzL._AC_SL1191_.jpg"},{"id":"gas-haeger-ultrawarm2","c":"gas","n":"HAEGER Ultra Warm II Estufa de Gas","kw":4.2,"m2":40,"p":73.42,"r":5.0,"rc":1,"img":"https://m.media-amazon.com/images/I/51PCI8LsarL._AC_SL1200_.jpg"},{"id":"gas-gude-ggh4200k","c":"gas","n":"Güde Calentador de Gas GGH 4200 K 3 Niveles","kw":4.2,"m2":40,"p":68.93,"r":4.3,"rc":28,"img":"https://m.media-amazon.com/images/I/61cST2CQCcL._AC_SL1474_.jpg"},{"id":"gas-outsunny-piramide-3000w","c":"gas","n":"Outsunny Estufa de Gas Butano Piramidal 3000W Exterior Bronce","kw":3,"m2":15,"p":112.99,"r":4.6,"rc":3,"img":"https://m.media-amazon.com/images/I/714Bzk1H2TL._AC_SL1500_.jpg"},{"id":"gas-sogo-catalitica-4200w","c":"gas","n":"SOGO Estufa de Gas Butano Catalítica de Cerámica 4200W Plegable","kw":4.2,"m2":40,"p":89.44,"r":4.2,"rc":485,"img":"https://m.media-amazon.com/images/I/71Yc1wuR4hL._AC_SL1500_.jpg"},{"id":"radiadores-cecotec-readywarm7000-space","c":"radiadores","n":"Cecotec Radiador Eléctrico de Aceite ReadyWarm 7000 Space 1500W","kw":1.5,"m2":15,"p":58.99,"r":3.9,"rc":560,"img":"https://m.media-amazon.com/images/I/51D5yTaMgVL._AC_SL1000_.jpg"},{"id":"radiadores-cecotec-readywarm6650-crystal","c":"radiadores","n":"Cecotec Radiador Eléctrico Ready Warm 6650 Crystal Connection WiFi 1000W","kw":1,"m2":10,"p":79.9,"r":4.1,"rc":1212,"img":"https://m.media-amazon.com/images/I/41QqCzh8aeL._AC_SL1000_.jpg"},{"id":"radiadores-cecotec-readywarm6750-crystal","c":"radiadores","n":"Cecotec Radiador Eléctrico Ready Warm 6750 Crystal Connection WiFi 2000W","kw":2,"m2":20,"p":89.9,"r":4.1,"rc":1831,"img":"https://m.media-amazon.com/images/I/51LEi2T2UiL._AC_SL1500_.jpg"},{"id":"radiadores-orbegozo-rmn2050-mica","c":"radiadores","n":"Orbegozo RMN 2050 Radiador Eléctrico Mica System 2000W Rojo","kw":2,"m2":20,"p":68.5,"r":4.5,"rc":1651,"img":"https://m.media-amazon.com/images/I/91ktQy8JT1L._AC_SL1500_.jpg"},{"id":"radiadores-cecotec-readywarm6670-crystal","c":"radiadores","n":"Cecotec Radiador Eléctrico Ready Warm 6670 Crystal Connection WiFi Negro 1000W","kw":1,"m2":10,"p":80.37,"r":4.1,"rc":1212,"img":"https://m.media-amazon.com/images/I/41RuDf40OtL._AC_SL1000_.jpg"}];
+
+// Precios por defecto (24/09/2026). Editables por el usuario.
+const DEF = { pvpc: 0.23, libre: 0.17, nose: 0.20, bombona: 18.84, saco: 5.67, lena: 0.26, gasoleo: 1.35 };
+let P = { ...DEF };
+const PRICE_INFO = [
+  { k: "pvpc", name: "Luz, tarifa regulada (PVPC)", unit: "€/kWh", step: 0.01,
+    src: 'Media PVPC sept. 2026: 0,185 €/kWh sin impuestos (<a href="https://www.costeenergia.es/historico/pvpc-mensual" target="_blank" rel="noopener">CostEEnergía</a>) + impuesto eléctrico e IVA' },
+  { k: "libre", name: "Luz, mercado libre", unit: "€/kWh", step: 0.01, src: "Precio típico de ofertas a precio fijo, con impuestos (orientativo)" },
+  { k: "nose", name: "Luz, si no sabes tu tarifa", unit: "€/kWh", step: 0.01, src: "Media entre las dos anteriores" },
+  { k: "bombona", name: "Bombona de butano 12,5 kg", unit: "€", step: 0.01,
+    src: 'Precio máximo desde el 15/09/2026 (<a href="https://www.que.es/2026/09/16/precio-bombona-butano-septiembre-subida/" target="_blank" rel="noopener">que.es</a>)' },
+  { k: "saco", name: "Saco de pellets 15 kg", unit: "€", step: 0.01,
+    src: 'Índice AVEBIOM, 2.º trimestre 2026 (<a href="https://www.caloryfrio.com/energias-renovables/biomasa/precios-especiales-en-sacos-de-pellets.html" target="_blank" rel="noopener">caloryfrio</a>)' },
+  { k: "lena", name: "Leña seca de encina", unit: "€/kg", step: 0.01,
+    src: 'Con entrega, entre 0,20 y 0,35 €/kg (<a href="https://www.maderaslacima.com/tarifas.html" target="_blank" rel="noopener">Maderas La Cima</a>)' },
+  { k: "gasoleo", name: "Gasóleo de calefacción", unit: "€/litro", step: 0.01,
+    src: 'Estimación: 1,27 €/l el 10/08/2026 (<a href="https://www.globalpetrolprices.com/Spain/heating_oil_prices/" target="_blank" rel="noopener">GlobalPetrolPrices</a>) y subiendo en septiembre' },
+];
+
+const PCI = { pellet: 4.8, lena: 3.8, butano: 12.7, gasoleo: 10.0 };
+
+const ZONES = {
+  alpha: { name: "Muy suave", code: "α", f: 0.70, lf: 0.35, h: 3, m: 2 },
+  A: { name: "Suave", code: "A", f: 0.85, lf: 0.40, h: 4, m: 3 },
+  B: { name: "Templado", code: "B", f: 0.92, lf: 0.42, h: 5, m: 4 },
+  C: { name: "Fresco", code: "C", f: 1.00, lf: 0.45, h: 6, m: 5 },
+  D: { name: "Frío", code: "D", f: 1.10, lf: 0.48, h: 7, m: 6 },
+  E: { name: "Muy frío", code: "E", f: 1.20, lf: 0.50, h: 8, m: 7 },
+};
+// Zona climática de invierno de la capital (CTE DB-HE, Anejo B)
+const PROV = {
+  "A Coruña":"C","Álava":"D","Albacete":"D","Alicante":"B","Almería":"A","Asturias":"D","Ávila":"E","Badajoz":"C",
+  "Barcelona":"C","Bizkaia":"C","Burgos":"E","Cáceres":"C","Cádiz":"A","Cantabria":"C","Castellón":"B","Ceuta":"B",
+  "Ciudad Real":"C","Córdoba":"B","Cuenca":"D","Gipuzkoa":"D","Girona":"D","Granada":"C","Guadalajara":"D","Huelva":"A",
+  "Huesca":"D","Illes Balears":"B","Jaén":"C","La Rioja":"D","Las Palmas":"alpha","León":"E","Lleida":"D","Lugo":"D",
+  "Madrid":"D","Málaga":"A","Melilla":"A","Murcia":"B","Navarra":"D","Ourense":"C","Palencia":"D","Pontevedra":"C",
+  "Salamanca":"D","Santa Cruz de Tenerife":"alpha","Segovia":"D","Sevilla":"B","Soria":"E","Tarragona":"B","Teruel":"D",
+  "Toledo":"C","Valencia":"B","Valladolid":"D","Zamora":"D","Zaragoza":"D"
+};
+const INS = { buena: 0.75, normal: 1.0, mala: 1.35 };
+const BASE_W = 95;
+
+const SYS = [
+  { id: "pellets", name: "Estufa de pellets", short: "Pellets", fuel: "pellet", eff: 0.85, tag: "Necesita salida de humos", cat: "pellets",
+    invest: () => 1500, units: kw => kw > 15 ? "Para tanta superficie: estufa canalizable o caldera" : "" },
+  { id: "lena", name: "Estufa de leña", short: "Leña", fuel: "lena", eff: 0.70, tag: "Necesita salida de humos", cat: "lena-biomasa",
+    invest: () => 1100 },
+  { id: "butano", name: "Estufa de butano", short: "Butano", fuel: "butano", eff: 1.0, tag: "Sin instalación", cat: "gas",
+    invest: kw => Math.ceil(kw / 4.2) * 90, units: kw => kw > 4.5 ? `Harían falta ≈ ${Math.ceil(kw / 4.2)} estufas. Mejor como apoyo: hay que ventilar` : "Hay que ventilar la habitación" },
+  { id: "gasoleo", name: "Caldera de gasóleo", short: "Gasóleo", fuel: "gasoleo", eff: 0.85, tag: "Precio en subida", onlyCurrent: true,
+    invest: () => 3000 },
+  { id: "electrica", name: "Estufa o radiador eléctrico", short: "Eléctrica", fuel: "luz", eff: 1.0, tag: "Enchufar y listo", cat: "electricos",
+    invest: kw => Math.ceil(kw / 2) * 60, units: kw => kw > 2.5 ? `Harían falta ≈ ${Math.ceil(kw / 2)} aparatos de 2.000 W` : "" },
+  { id: "chimenea", name: "Chimenea abierta de leña", short: "Chimenea abierta", fuel: "lena", eff: 0.20, onlyCurrent: true,
+    invest: () => 0, units: () => "Se escapa el 80 % del calor por el tiro" },
+];
+const SYSMAP = Object.fromEntries(SYS.map(s => [s.id, s]));
+
+const PCATS = [
+  { c: "pellets", n: "Pellets" }, { c: "lena-biomasa", n: "Leña" }, { c: "electricos", n: "Eléctricas" },
+  { c: "gas", n: "Butano" }, { c: "radiadores", n: "Radiadores" },
+];
+
+const DEV = {
+  electrica: { name: "Eléctrica", unit: "W", opts: [800, 1000, 1500, 2000, 2500], def: 2000, sys: "electrica", cat: "electricos",
+    hint: "Viene en la etiqueta o en la caja (en vatios, W)." },
+  pellets: { name: "Pellets", unit: "kW", opts: [6, 8, 10, 12], def: 8, sys: "pellets", cat: "pellets",
+    hint: "Potencia nominal de la estufa (en kW)." },
+  butano: { name: "Butano", unit: "kW", opts: [3, 4.2], def: 4.2, sys: "butano", cat: "gas",
+    hint: "La mayoría de estufas de butano tienen 4,2 kW." },
+  lena: { name: "Leña", unit: "kW", opts: [6, 8, 10, 12], def: 8, sys: "lena", cat: "lena-biomasa",
+    hint: "Potencia nominal de la estufa (en kW)." },
+};
+
+/* ============ ESTADO ============ */
+const S = {
+  prov: "Madrid", zone: null, m2: 80, ins: "normal", hours: 7, months: 6, touchedH: false, touchedM: false,
+  current: "none", tarifa: "nose", pcat: null,
+  dev: "electrica", devPow: 2000, devLvl: 0.6, devHours: 5, devDays: 30,
+};
+
+/* ============ UTILIDADES ============ */
+const $ = id => document.getElementById(id);
+const nf = (v, d = 0) => v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
+const eur = (v, d) => {
+  if (d === undefined) d = v < 10 ? 2 : 0;
+  return nf(v, d) + " €";
+};
+const round = v => v >= 100 ? Math.round(v / 10) * 10 : v >= 10 ? Math.round(v) : Math.round(v * 10) / 10;
+const luz = () => P[S.tarifa];
+const zoneKey = () => S.zone || PROV[S.prov];
+
+// € por kWh de calor útil
+function cpk(s) {
+  switch (s.fuel) {
+    case "luz": return luz() / s.eff;
+    case "gas": return P.gas / s.eff;
+    case "pellet": return (P.saco / 15) / (PCI.pellet * s.eff);
+    case "lena": return P.lena / (PCI.lena * s.eff);
+    case "butano": return (P.bombona / 12.5) / (PCI.butano * s.eff);
+    case "gasoleo": return P.gasoleo / (PCI.gasoleo * s.eff);
+  }
+}
+// Cantidad de combustible para E kWh de calor útil
+function qtyText(s, E) {
+  switch (s.fuel) {
+    case "luz": return `≈ ${nf(round(E / s.eff))} kWh de luz`;
+    case "gas": return `≈ ${nf(round(E / s.eff))} kWh de gas`;
+    case "pellet": { const sacos = E / (PCI.pellet * s.eff) / 15; return `≈ ${nf(sacos, sacos < 10 ? 1 : 0)} sacos de pellets`; }
+    case "lena": return `≈ ${nf(round(E / (PCI.lena * s.eff)))} kg de leña`;
+    case "butano": { const b = E / (PCI.butano * s.eff) / 12.5; return `≈ ${nf(b, b < 10 ? 1 : 0)} bombonas`; }
+    case "gasoleo": return `≈ ${nf(round(E / (PCI.gasoleo * s.eff)))} litros`;
+  }
+}
+
+/* ============ CÁLCULO CASA ============ */
+function house() {
+  const z = ZONES[zoneKey()];
+  const kw = S.m2 * BASE_W * z.f * INS[S.ins] / 1000;
+  const E = kw * z.lf * S.hours * 30.4 * S.months; // kWh de calor por invierno
+  const rows = SYS.filter(s => !s.onlyCurrent || s.id === S.current)
+    .map(s => ({ s, season: E * cpk(s), month: E * cpk(s) / S.months }))
+    .sort((a, b) => a.season - b.season);
+  return { z, kw, E, rows };
+}
+
+function renderHouse() {
+  const { z, kw, E, rows } = house();
+  $("climaName").textContent = `${z.name} (zona ${z.code})`;
+  $("m2Out").textContent = `${S.m2} m²`;
+  $("hoursOut").textContent = `${S.hours} h`;
+  $("monthsOut").textContent = `${S.months} ${S.months === 1 ? "mes" : "meses"}`;
+
+  const best = rows[0];
+  $("kBest").textContent = best.s.name;
+  $("kPow").textContent = `${nf(kw, 1)} kW`;
+  $("kEn").textContent = `${nf(round(E))} kWh`;
+  $("ctx").textContent = `${S.m2} m² en ${S.prov} · clima ${z.name.toLowerCase()} · aislamiento ${{buena:'bueno',normal:'normal',mala:'malo'}[S.ins]} · ${S.hours} h al día durante ${S.months} ${S.months === 1 ? "mes" : "meses"}`;
+
+  const cur = rows.find(r => r.s.id === S.current);
+  let v;
+  if (cur) {
+    const better = rows.filter(r => r.season < cur.season);
+    if (!better.length) {
+      v = `Ahora gastas ≈ <b>${eur(round(cur.season))}</b> por invierno: ya usas la estufa más barata. Si toca renovarla, mira los modelos más eficientes de CalorBrasa.`;
+    } else {
+      // Mejor alternativa: la que antes se amortiza (y como mucho en 10 inviernos); si no, la más barata
+      const opts = better.map(r => ({ r, save: cur.season - r.season, pay: r.s.invest(kw) / (cur.season - r.season) }));
+      const quick = opts.filter(o => o.pay <= 10).sort((a, b) => b.save - a.save)[0] || opts.sort((a, b) => b.save - a.save)[0];
+      v = `Ahora gastas ≈ <b>${eur(round(cur.season))}</b> por invierno con ${cur.s.short.toLowerCase()}. ` +
+          `Con una ${quick.r.s.name.toLowerCase()} ahorrarías ≈ <b>${eur(round(quick.save))} al año</b>.`;
+    }
+  } else {
+    v = `Con una ${best.s.name.toLowerCase()} el invierno te costaría ≈ <b>${eur(round(best.season))}</b>. ` +
+        `Elige lo que usas ahora en el paso 3 y te decimos cuánto ahorrarías.`;
+  }
+  $("verdict").innerHTML = v;
+
+  $("rankSub").textContent = `Gasto estimado de todo el invierno (${S.months} ${S.months === 1 ? "mes" : "meses"}) para calentar tus ${S.m2} m².`;
+  const max = Math.max(...rows.map(r => r.season));
+  $("rank").innerHTML = rows.map((r, i) => {
+    const s = r.s, isCur = s.id === S.current;
+    const meta = [];
+    meta.push(`${eur(round(r.month))}/mes`);
+    meta.push(`${qtyText(s, E / S.months)} al mes`);
+    if (cur && !isCur && r.season < cur.season) {
+      const save = cur.season - r.season, inv = s.invest(kw);
+      const pay = inv / save;
+      meta.push(`<span class="save">Ahorras ${eur(round(save))}/año${inv ? ` · se paga en ${pay < 1 ? "menos de 1 invierno" : pay > 15 ? "más de 15 inviernos" : "≈ " + nf(Math.ceil(pay)) + (Math.ceil(pay) === 1 ? " invierno" : " inviernos")}` : ""}</span>`);
+    }
+    const u = s.units ? s.units(kw) : "";
+    if (u) meta.push(`<span class="warn">${u}</span>`);
+    if (s.cat) meta.push(`<a href="${CAT_URL(s.cat)}" target="_blank" rel="noopener">Ver modelos en CalorBrasa →</a>`);
+    return `<li class="row${isCur ? " cur" : ""}">
+      <span class="pos">${i + 1}</span>
+      <span class="name">${s.name}${isCur ? '<span class="badge">Lo que usas</span>' : `<span class="tag">${s.tag || ""}</span>`}</span>
+      <span class="price">${eur(round(r.season))}<small>por invierno</small></span>
+      <div class="barline" aria-hidden="true"><div class="bar" style="width:${Math.max(3, r.season / max * 100).toFixed(1)}%"></div></div>
+      <div class="meta">${meta.map(m => m.startsWith("<") ? m : `<span>${m}</span>`).join("")}</div>
+    </li>`;
+  }).join("");
+
+  renderProducts(kw);
+}
+
+/* ============ PRODUCTOS ============ */
+function pickProducts(cat, m2) {
+  const list = PRODUCTS.filter(p => p.c === cat);
+  const fit = list.filter(p => p.m2 >= m2);
+  if (!fit.length) return { chosen: [...list].sort((a, b) => b.m2 - a.m2 || score(b) - score(a)).slice(0, 3), fits: false, any: list.length > 0 };
+  let pool = fit.filter(p => p.m2 <= Math.max(m2 * 1.6, m2 + 15));
+  if (pool.length < 3) pool = [...fit].sort((a, b) => a.m2 - b.m2).slice(0, 6);
+  return { chosen: [...pool].sort((a, b) => score(b) - score(a)).slice(0, 3), fits: true, any: true };
+}
+// Nota ponderada: pocas reseñas pesan menos (media bayesiana)
+const score = p => ((p.r || 0) * (p.rc || 0) + 4.3 * 15) / ((p.rc || 0) + 15);
+function defaultCat() { return S.m2 <= 25 ? "electricos" : "pellets"; }
+function renderProducts(kw) {
+  const cat = S.pcat || defaultCat();
+  $("pcats").innerHTML = PCATS.map(p => `<button type="button" class="chip" data-c="${p.c}" aria-pressed="${p.c === cat}">${p.n}</button>`).join("");
+  const { chosen, fits } = pickProducts(cat, S.m2);
+  $("prodTitle").textContent = `Estufas que encajan con tus ${S.m2} m²`;
+  const catName = PCATS.find(p => p.c === cat).n.toLowerCase();
+  $("prodNote").textContent = fits
+    ? `Seleccionadas por superficie y valoraciones. Tu casa necesita unos ${nf(kw, 1)} kW.`
+    : `Ningún modelo de ${catName} llega a ${S.m2} m² por sí solo: estos son los más potentes. Para tanta superficie mira estufas canalizables o combina varias.`;
+  $("prodAll").href = CAT_URL(cat);
+  $("prodAll").textContent = `Ver todas las de ${catName} →`;
+  $("prods").innerHTML = chosen.map(p => {
+    const img = (p.img || "").replace(/_AC_SL\d+_/, "_AC_SL300_");
+    return `<a class="prod" href="${PROD_URL(p.id)}" target="_blank" rel="noopener">
+      <div class="img"><img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+      <div class="body">
+        <span class="pn">${p.n}</span>
+        <span class="ps">${nf(p.kw, 1)} kW · hasta ${p.m2} m²</span>
+        <span class="pp"><span>${p.p < 200 ? "<b>€</b> Gama económica" : p.p <= 700 ? "<b>€€</b> Gama media" : "<b>€€€</b> Gama alta"}</span><span class="go">Ver en CalorBrasa →</span></span>
+      </div></a>`;
+  }).join("");
+}
+// Intentar cargar el catálogo actualizado desde CalorBrasa
+fetch(SITE + "data/products.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(d => {
+  if (!Array.isArray(d) || !d.length) return;
+  PRODUCTS = d.map(p => ({ id: p.id, c: p.category, n: p.name, kw: p.potencia_kw, m2: p.superficie_calefactable_m2,
+    p: p.discountedPrice || p.retailPrice, r: p.valoracion_media, rc: p.resenas_cantidad, img: p.image_url }));
+  renderHouse();
+}).catch(() => {});
+
+/* ============ MODO APARATO ============ */
+function renderDevice() {
+  const d = DEV[S.dev], s = SYSMAP[d.sys];
+  $("devType").innerHTML = Object.entries(DEV).map(([k, v]) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${k === S.dev}">${v.name}</button>`).join("");
+  $("devPowChips").innerHTML = d.opts.map(o => `<button type="button" class="chip" data-v="${o}" aria-pressed="${o === S.devPow}">${nf(o, o % 1 ? 1 : 0)} ${d.unit}</button>`).join("");
+  $("devPowLbl").textContent = "Potencia";
+  if (document.activeElement !== $("devPow")) $("devPow").value = S.devPow;
+  $("devPow").step = d.unit === "W" ? 100 : 0.1;
+  $("devPowOut").textContent = `${nf(S.devPow, S.devPow % 1 ? 1 : 0)} ${d.unit}`;
+  $("devPowHint").textContent = d.hint;
+  $("devLvl").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === S.devLvl)));
+  $("devHoursOut").textContent = `${S.devHours} h`;
+  $("devDaysOut").textContent = `${S.devDays} días`;
+
+  const kwNom = d.unit === "W" ? S.devPow / 1000 : S.devPow;
+  const heat = kwNom * S.devLvl; // kW de calor medio
+  const perH = heat * cpk(s), perD = perH * S.devHours, perM = perD * S.devDays, perS = perM * S.months;
+  $("dH").textContent = eur(perH, 2);
+  $("dD").textContent = eur(perD, 2);
+  $("dM").textContent = eur(perM, perM < 100 ? 2 : 0);
+  $("dS").textContent = eur(round(perS), 0);
+  $("dSl").textContent = `por invierno (${S.months} meses)`;
+  const pw = `${nf(S.devPow, S.devPow % 1 ? 1 : 0)} ${d.unit}`;
+  $("devTitle").textContent = `Lo que gasta tu ${d.sys === "electrica" ? "estufa eléctrica" : "estufa de " + d.name.toLowerCase()} de ${pw}`;
+  $("devSub").textContent = `Usándola ${S.devHours} h al día, ${S.devDays} días al mes, en modo ${S.devLvl === 1 ? "a tope" : S.devLvl === 0.6 ? "normal" : "suave"}.`;
+
+  const f = [];
+  const hMonth = S.devHours * S.devDays;
+  if (s.fuel === "luz" && s.id === "electrica") {
+    f.push(`Consume <b>${nf(heat, 2)} kWh</b> cada hora (${nf(round(heat * hMonth))} kWh al mes) con la luz a ${nf(luz(), 2)} €/kWh.`);
+    f.push(`A tope costaría ${eur(kwNom * luz(), 2)} por hora. El termostato hace que trabaje menos rato y gaste menos.`);
+
+  } else if (s.fuel === "pellet") {
+    const kgh = heat / (PCI.pellet * s.eff);
+    f.push(`Quema <b>${nf(kgh, 2)} kg de pellets</b> por hora: unos <b>${nf(kgh * hMonth / 15, 1)} sacos</b> de 15 kg al mes.`);
+    f.push(`Un saco te dura ≈ ${nf(15 / kgh, 0)} horas de uso (≈ ${nf(15 / kgh / S.devHours, 1)} días).`);
+  } else if (s.fuel === "butano") {
+    const kgh = heat / (PCI.butano * s.eff), hrs = 12.5 / kgh;
+    f.push(`Una bombona de 12,5 kg te dura <b>≈ ${nf(hrs, 0)} horas</b> de uso (≈ ${nf(hrs / S.devHours, 0)} días).`);
+    f.push(`Necesitarás ≈ ${nf(hMonth / hrs, 1)} bombonas al mes, a ${eur(P.bombona, 2)} cada una.`);
+    f.push(`Ventila la habitación a menudo: la estufa de butano consume oxígeno y suelta humedad.`);
+  } else if (s.fuel === "lena") {
+    const kgh = heat / (PCI.lena * s.eff);
+    f.push(`Quema <b>≈ ${nf(kgh, 1)} kg de leña</b> por hora: unos ${nf(round(kgh * hMonth))} kg al mes.`);
+    f.push(`Con leña húmeda gastarás bastante más: compra leña seca (menos del 20 % de humedad).`);
+  }
+  $("devFacts").innerHTML = f.map(x => `<li>${x}</li>`).join("");
+
+  // Mismo calor con otras opciones
+  const E = heat * hMonth;
+  const others = SYS.filter(o => !o.onlyCurrent).map(o => ({ s: o, month: E * cpk(o) })).sort((a, b) => a.month - b.month);
+  const max = Math.max(...others.map(o => o.month));
+  $("devRank").innerHTML = others.map((o, i) => {
+    const isMe = o.s.id === s.id;
+    return `<li class="row${isMe ? " cur" : ""}">
+      <span class="pos">${i + 1}</span>
+      <span class="name">${o.s.name}${isMe ? '<span class="badge">El tuyo</span>' : ""}</span>
+      <span class="price">${eur(o.month, o.month < 100 ? 2 : 0)}<small>al mes</small></span>
+      <div class="barline" aria-hidden="true"><div class="bar" style="width:${Math.max(3, o.month / max * 100).toFixed(1)}%"></div></div>
+      ${o.s.cat ? `<div class="meta"><a href="${CAT_URL(o.s.cat)}" target="_blank" rel="noopener">Ver modelos en CalorBrasa →</a></div>` : ""}
+    </li>`;
+  }).join("");
+  $("devCta").href = d.cat ? CAT_URL(d.cat) : SITE;
+}
+
+/* ============ PREGUNTAS FRECUENTES ============ */
+function faqs() {
+  const L = luz(), el = SYSMAP.electrica, pe = SYSMAP.pellets, bu = SYSMAP.butano;
+  const kgh8 = 8 * 0.6 / (PCI.pellet * pe.eff);
+  const perKwh = SYS.filter(s => !s.onlyCurrent).map(s => ({ s, c: cpk(s) })).sort((a, b) => a.c - b.c);
+  const h = house();
+  const pel = h.E / (PCI.pellet * pe.eff) / 15;
+  const go = h.E * cpk(SYSMAP.gasoleo), pl = h.E * cpk(pe), le = h.E * cpk(SYSMAP.lena);
+  return [
+    ["¿Cuánto gasta una estufa eléctrica de 2.000 W?",
+     `A máxima potencia consume 2 kWh cada hora: unos ${eur(2 * L, 2)} por hora con la luz a ${nf(L, 2)} €/kWh. Con termostato suele trabajar al 60 %, así que ronda ${eur(1.2 * L, 2)} por hora: unos ${eur(round(1.2 * L * 5 * 30))} al mes si la usas 5 horas al día.`],
+    ["¿Qué estufa es más barata de usar?",
+     `Por cada kWh de calor: ${perKwh.map(x => `${x.s.name.toLowerCase()} ${nf(x.c * 100, 1)} céntimos`).join(", ")}. Una caldera de gasóleo sale ahora a ${nf(cpk(SYSMAP.gasoleo) * 100, 1)} céntimos por kWh. Además del gasto, cuenta el precio de compra: la calculadora te dice en cuántos inviernos se paga cada estufa.`],
+    ["¿Cuánto gasta una estufa de pellets al día?",
+     `Una estufa de 8 kW en modo normal quema unos ${nf(kgh8, 1)} kg de pellets por hora. Usándola 6 horas son ${nf(kgh8 * 6, 1)} kg al día (medio saco): unos ${eur(kgh8 * 6 * P.saco / 15, 2)} al día con el saco a ${eur(P.saco, 2)}.`],
+    ["¿Cuánto dura una bombona de butano?",
+     `Una bombona de 12,5 kg dura unas ${nf(12.5 * PCI.butano / 4.2, 0)} horas con una estufa de 4,2 kW a tope, y unas ${nf(12.5 * PCI.butano / (4.2 * 0.6), 0)} horas en potencia media. Cada bombona cuesta ${eur(P.bombona, 2)} desde el 15 de septiembre de 2026.`],
+    ["¿Cuántos sacos de pellets se gastan en un invierno?",
+     `Depende de los metros y del clima. Para ${S.m2} m² en ${S.prov}, con ${S.hours} horas al día durante ${S.months} meses, unos ${nf(Math.round(pel))} sacos de 15 kg (≈ ${eur(round(pl))}).`],
+    ["¿Merece la pena dejar la caldera de gasóleo?",
+     `Con los precios actuales, calentar ${S.m2} m² en ${S.prov} con gasóleo cuesta ≈ ${eur(round(go))} por invierno. Con una estufa de pellets serían ≈ ${eur(round(pl))} y con una de leña ≈ ${eur(round(le))}. La estufa se paga con el ahorro en pocos inviernos.`],
+  ];
+}
+function renderFaq() {
+  $("faqList").innerHTML = faqs().map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join("");
+}
+function faqSchema() {
+  const data = { "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faqs().map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+  const app = { "@context": "https://schema.org", "@type": "WebApplication", name: "Calculadora de calefacción",
+    applicationCategory: "UtilitiesApplication", operatingSystem: "Web", inLanguage: "es",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+    publisher: { "@type": "Organization", name: "CalorBrasa", url: SITE } };
+  [data, app].forEach(o => { const s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(o); document.head.appendChild(s); });
+}
+
+/* ============ PRECIOS ============ */
+function renderPrices() {
+  $("priceRows").innerHTML = PRICE_INFO.map(p =>
+    `<tr><td><label for="p-${p.k}">${p.name}</label><br><small>${p.unit}</small></td>
+     <td><input type="number" id="p-${p.k}" data-k="${p.k}" min="0" step="${p.step}" value="${P[p.k]}"></td>
+     <td><small>${p.src}</small></td></tr>`).join("");
+}
+
+/* ============ EVENTOS ============ */
+function renderAll() { renderHouse(); renderDevice(); renderFaq(); }
+
+function setZoneDefaults() {
+  const z = ZONES[zoneKey()];
+  if (!S.touchedH) { S.hours = z.h; $("hours").value = z.h; }
+  if (!S.touchedM) { S.months = z.m; $("months").value = z.m; }
+  $("climaChips").innerHTML = Object.entries(ZONES).map(([k, v]) =>
+    `<button type="button" class="chip" data-z="${k}" aria-pressed="${k === zoneKey()}">${v.name}</button>`).join("");
+}
+function pressGroup(id, attr, val) {
+  $(id).querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset[attr] === String(val))));
+}
+
+function init() {
+  const provSel = $("prov");
+  provSel.innerHTML = Object.keys(PROV).sort((a, b) => a.localeCompare(b, "es")).map(p => `<option${p === S.prov ? " selected" : ""}>${p}</option>`).join("");
+  provSel.onchange = () => { S.prov = provSel.value; S.zone = null; setZoneDefaults(); renderAll(); };
+  $("climaBtn").onclick = () => { const h = $("climaPick").hidden; $("climaPick").hidden = !h; $("climaBtn").setAttribute("aria-expanded", String(h)); };
+  $("climaChips").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.zone = b.dataset.z; setZoneDefaults(); renderAll(); };
+
+  $("m2").oninput = e => { S.m2 = +e.target.value; pressGroup("m2Chips", "v", ""); renderAll(); };
+  $("m2Chips").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.m2 = +b.dataset.v; $("m2").value = S.m2; pressGroup("m2Chips", "v", S.m2); renderAll(); };
+  $("insSeg").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.ins = b.dataset.v; pressGroup("insSeg", "v", S.ins); renderAll(); };
+  $("hours").oninput = e => { S.hours = +e.target.value; S.touchedH = true; renderAll(); };
+  $("months").oninput = e => { S.months = +e.target.value; S.touchedM = true; renderAll(); };
+
+  $("current").innerHTML = `<option value="none">No tengo / prefiero no decirlo</option>` +
+    SYS.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+  $("current").onchange = e => { S.current = e.target.value; renderAll(); };
+  $("tarSeg").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.tarifa = b.dataset.v; pressGroup("tarSeg", "v", S.tarifa); renderAll(); };
+  $("pcats").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.pcat = b.dataset.c; renderHouse(); };
+
+  // Aparato
+  $("devType").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.dev = b.dataset.k; S.devPow = DEV[S.dev].def; renderDevice(); };
+  $("devPowChips").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.devPow = +b.dataset.v; renderDevice(); };
+  $("devPow").oninput = e => { const v = parseFloat(e.target.value); if (v > 0) { S.devPow = v; renderDevice(); } };
+  $("devLvl").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.devLvl = +b.dataset.v; renderDevice(); };
+  $("devHours").oninput = e => { S.devHours = +e.target.value; renderDevice(); };
+  $("devDays").oninput = e => { S.devDays = +e.target.value; renderDevice(); };
+
+  // Pestañas
+  const tabs = [["tab-casa", "modo-casa"], ["tab-aparato", "modo-aparato"]];
+  tabs.forEach(([t, p]) => $(t).onclick = () => tabs.forEach(([t2, p2]) => {
+    $(t2).setAttribute("aria-selected", String(t2 === t)); $(p2).hidden = p2 !== p;
+  }));
+
+  // Precios
+  renderPrices();
+  $("priceRows").oninput = e => { const k = e.target.dataset.k; const v = parseFloat(e.target.value); if (k && v >= 0) { P[k] = v; renderAll(); } };
+  $("resetPrices").onclick = () => { P = { ...DEF }; renderPrices(); renderAll(); };
+
+  // Enlaces a webs hermanas
+  document.querySelectorAll("[data-web]").forEach(a => { a.href = WEBS[a.dataset.web] || "#"; });
+
+  pressGroup("insSeg", "v", S.ins); pressGroup("tarSeg", "v", S.tarifa); pressGroup("m2Chips", "v", S.m2);
+  setZoneDefaults();
+  renderAll();
+  faqSchema();
+}
+init();
+</script>
+</body>
+</html>
