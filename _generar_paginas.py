@@ -9,6 +9,7 @@ Uso:  python3 _generar_paginas.py [ruta/a/products.json]
 Los archivos que empiezan por "_" no se publican en GitHub Pages.
 """
 import html
+import math
 import json
 import re
 import sys
@@ -518,28 +519,60 @@ table.data td small{color:var(--muted)}
 </style>"""
 
 
+GUIDES = {
+    "potencia": dict(slug="calculadora-potencia-estufa", nav="Potencia",
+                     h1="¿Qué potencia de estufa necesito?",
+                     short="Los kW según tus m², tu provincia y el aislamiento."),
+    "barata": dict(slug="que-calefaccion-es-mas-barata", nav="Más barata",
+                   h1="¿Qué calefacción es más barata en 2026?",
+                   short="Lo que cuesta cada sistema y cuál te conviene."),
+    "seguridad": dict(slug="es-peligrosa-estufa-butano", nav="Seguridad butano",
+                      h1="¿Es peligrosa una estufa de butano?",
+                      short="Riesgos reales y cómo usarla sin peligro."),
+}
+SHORT = {
+    "butano": "Por hora, cuánto dura la bombona y al mes.",
+    "electrica": "800, 1.500 y 2.000 W por hora y al mes.",
+    "pellets": "Kilos por hora, sacos al mes y por invierno.",
+    "lena": "Kilos por hora y leña para todo el invierno.",
+}
+
+
+def any_url(k):
+    if k == "home":
+        return BASE
+    pg = PAGES.get(k) or GUIDES[k]
+    return BASE + pg["slug"] + ".html"
+
+
 def nav_html(active):
-    links = [f'<a class="star" href="{CB}">★ CalorBrasa</a>', f'<a href="{BASE}">Calculadora</a>']
-    for k, pg in PAGES.items():
+    def a(k, label):
         cls = ' class="on"' if k == active else ""
-        links.append(f'<a{cls} href="{BASE}{pg["slug"]}.html">Gasto {pg["nav"].lower()}</a>')
-    links.append(f'<a href="{CB}comparador.html">Comparador de estufas</a>')
+        return f'<a{cls} href="{any_url(k)}">{label}</a>'
+    links = [f'<a class="star" href="{CB}">★ CalorBrasa</a>', a("home", "Calculadora"), a("potencia", "Potencia"),
+             a("barata", "Más barata")]
+    links += [a(k, "Gasto " + pg["nav"].lower()) for k, pg in PAGES.items()]
+    links += [a("seguridad", "Seguridad butano"), f'<a href="{CB}comparador.html">Comparador de estufas</a>']
     return "\n    ".join(links)
+
+
+RELATED = {
+    "butano": ["seguridad", "electrica", "barata", "potencia"],
+    "electrica": ["barata", "butano", "potencia", "pellets"],
+    "pellets": ["potencia", "lena", "barata", "electrica"],
+    "lena": ["potencia", "pellets", "barata", "butano"],
+    "potencia": ["barata", "pellets", "electrica", "butano"],
+    "barata": ["potencia", "pellets", "electrica", "lena"],
+    "seguridad": ["butano", "electrica", "barata", "potencia"],
+}
 
 
 def related(active):
     cards = []
-    desc = {
-        "butano": "Por hora, cuánto dura la bombona y al mes.",
-        "electrica": "800, 1.500 y 2.000 W por hora y al mes.",
-        "pellets": "Kilos por hora, sacos al mes y por invierno.",
-        "lena": "Kilos por hora y leña para todo el invierno.",
-    }
-    for k, pg in PAGES.items():
-        if k == active:
-            continue
-        cards.append(f'<a href="{BASE}{pg["slug"]}.html"><b>{pg["h1"]}</b><span>{desc[k]}</span></a>')
-    cards.append(f'<a href="{BASE}"><b>¿Cuánto te cuesta calentar tu casa?</b><span>Calcula qué estufa te sale más barata para tus metros.</span></a>')
+    for k in RELATED[active]:
+        pg = PAGES.get(k) or GUIDES[k]
+        short = SHORT.get(k) or GUIDES[k]["short"]
+        cards.append(f'<a href="{any_url(k)}"><b>{pg["h1"]}</b><span>{short}</span></a>')
     return "\n      ".join(cards)
 
 
@@ -886,8 +919,596 @@ const P = {json.dumps(P)};
 """
 
 
+# ======================================================================
+# GUÍAS: potencia, qué calefacción es más barata y seguridad del butano
+# ======================================================================
+ZONES = {
+    "alpha": dict(name="Muy suave", code="α", f=0.70, lf=0.35, h=3, m=2),
+    "A": dict(name="Suave", code="A", f=0.85, lf=0.40, h=4, m=3),
+    "B": dict(name="Templado", code="B", f=0.92, lf=0.42, h=5, m=4),
+    "C": dict(name="Fresco", code="C", f=1.00, lf=0.45, h=6, m=5),
+    "D": dict(name="Frío", code="D", f=1.10, lf=0.48, h=7, m=6),
+    "E": dict(name="Muy frío", code="E", f=1.20, lf=0.50, h=8, m=7),
+}
+PROV = dict(re.findall(r'"([^"]+)":"(\w+)"', re.search(r"const PROV = \{(.*?)\};", index_src, re.S).group(1)))
+INS = {"buena": 0.75, "normal": 1.0, "mala": 1.35}
+BASE_W = 95
+
+# Gas natural (TUR) y bomba de calor: rangos, no forman parte de la calculadora
+GAS_TUR_LOW, GAS_TUR_HIGH = 0.050428, 0.0695   # €/kWh sin impuestos, oct. 2026 (papernest / estimación OCU)
+IEH, IVA, EFF_CALDERA = 0.00234, 1.21, 0.90
+c_gn_low = (GAS_TUR_LOW + IEH) * IVA / EFF_CALDERA
+c_gn_high = (GAS_TUR_HIGH + IEH) * IVA / EFF_CALDERA
+c_bdc_low, c_bdc_high = LUZ / 4, LUZ / 3   # SCOP 4 a 3
+
+
+def need_kw(m2, zone, ins="normal", h=2.5):
+    return m2 * BASE_W * ZONES[zone]["f"] * INS[ins] * (h / 2.5) / 1000
+
+
+def season_kwh(m2, zone, ins="normal", hours=None, months=None):
+    z = ZONES[zone]
+    hours = hours or z["h"]
+    months = months or z["m"]
+    return need_kw(m2, zone, ins) * z["lf"] * hours * 30.4 * months
+
+
+def footer_html():
+    return f"""<footer>
+  <div class="wrap">
+    <div class="links">
+      <a class="star" href="{CB}">★ CalorBrasa</a>
+      <a href="{BASE}">Calculadora de calefacción</a>
+      <a href="{CAT_URL['pellets']}">Estufas de pellets</a>
+      <a href="{CAT_URL['lena-biomasa']}">Estufas de leña</a>
+      <a href="{CAT_URL['electricos']}">Estufas eléctricas</a>
+      <a href="{CAT_URL['gas']}">Estufas de butano</a>
+      <a href="{CAT_URL['radiadores']}">Radiadores</a>
+    </div>
+    <p>Resultados orientativos. Los enlaces a CalorBrasa llevan a productos de Amazon con enlace de afiliado: si compras, CalorBrasa puede recibir una comisión sin coste extra para ti. © 2026 CalorBrasa.</p>
+  </div>
+</footer>"""
+
+
+def shell(key, title, desc, lead, answer, body, fq, btn, script="", prices=True):
+    g = GUIDES[key]
+    url = any_url(key)
+    ld = [
+        {"@context": "https://schema.org", "@type": "FAQPage",
+         "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub("<[^>]+>", "", a)}} for q, a in fq]},
+        {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Calculadora de calefacción", "item": BASE},
+            {"@type": "ListItem", "position": 2, "name": g["h1"], "item": url}]},
+        {"@context": "https://schema.org", "@type": "Article", "headline": title, "description": desc,
+         "inLanguage": "es", "datePublished": UPDATED_ISO, "dateModified": UPDATED_ISO, "mainEntityOfPage": url,
+         "author": {"@type": "Organization", "name": "CalorBrasa", "url": CB},
+         "publisher": {"@type": "Organization", "name": "CalorBrasa", "url": CB}},
+    ]
+    ld_html = "\n".join(f'<script type="application/ld+json">{json.dumps(o, ensure_ascii=False)}</script>' for o in ld)
+    faq_html = "\n      ".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in fq)
+    return f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(desc)}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{url}">
+<meta property="og:site_name" content="Calculadora de Calefacción">
+<meta property="og:locale" content="es_ES">
+<meta name="theme-color" content="#C1440E">
+{GTAG}
+{FAVICON}
+{CSS}
+{EXTRA_CSS}
+{GUIDE_CSS}
+{ld_html}
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="{BASE}">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#C1440E"/><path d="M16 6c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-3-1-6 1-9z" fill="#F2A93B"/></svg>
+      <span>Calculadora de Calefacción<small>una herramienta de CalorBrasa</small></span>
+    </a>
+    <a class="btn" href="{btn[0]}">{btn[1]}</a>
+  </div>
+</header>
+<nav class="net" aria-label="Nuestras webs">
+  <div class="wrap">
+    {nav_html(key)}
+  </div>
+</nav>
+
+<main class="wrap">
+  <p class="crumbs"><a href="{BASE}">Calculadora de calefacción</a> › {g['h1']}</p>
+  <section class="hero">
+    <h1>{g['h1']}</h1>
+    <p>{lead}</p>
+    <div class="answer"><p>{answer}</p></div>
+    <ul class="trust" style="margin-top:14px">
+      <li>Actualizado en <b>{UPDATED_TXT}</b></li>
+      {f'<li>Precios de <b>{PRICES_TXT}</b></li>' if prices else ''}
+    </ul>
+  </section>
+
+{body}
+
+  <div class="below">
+    <section class="card faq" id="faq">
+      <h2>Preguntas frecuentes</h2>
+      {faq_html}
+    </section>
+
+    <section class="bigcta">
+      <div>
+        <h2>Encuentra la estufa que más te conviene</h2>
+        <p>En CalorBrasa comparas más de 100 estufas: potencia, metros que calientan, gasto y opiniones.</p>
+      </div>
+      <a class="btn" href="{CB}comparador.html">Ir al comparador de CalorBrasa →</a>
+    </section>
+
+    <section>
+      <h2 style="font-size:20px;margin:0">Amplía información</h2>
+      <div class="netlinks four">
+      {related(key)}
+      </div>
+    </section>
+  </div>
+</main>
+
+{footer_html()}
+{script}
+</body>
+</html>
+"""
+
+
+GUIDE_CSS = """<style>
+.kpi-big{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:2px 0 12px}
+.kpi-big b{font-size:clamp(34px,6vw,48px);letter-spacing:-1px;color:var(--amber)}
+.kpi-big span{color:#d6ccc4}
+.equiv{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.equiv li{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:15px}
+.equiv li a{font-weight:600}
+.picks{display:grid;gap:14px}
+.picks h3{font-size:15px;margin:0 0 6px}
+.picks ul{margin:0;padding-left:18px}
+.picks li{font-size:14.5px;margin:3px 0}
+.picks small{color:var(--muted)}
+.risk{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.risk div{background:var(--surface-2);border-radius:12px;padding:14px}
+.risk b{display:block;margin-bottom:4px}
+.risk p{margin:0;font-size:15px;color:var(--muted)}
+.alert{background:var(--amber-soft);border-left:4px solid var(--primary);border-radius:12px;padding:14px 16px;margin-top:14px}
+.alert p{margin:0 0 6px}
+.alert p:last-child{margin:0}
+ol.rules{padding-left:22px;margin:8px 0 0}
+ol.rules li{margin-bottom:8px}
+.zones{columns:2;column-gap:24px;font-size:14.5px;margin:10px 0 0;padding:0;list-style:none}
+.zones li{break-inside:avoid;margin-bottom:8px}
+.zones b{color:var(--primary)}
+@media (max-width:640px){.risk{grid-template-columns:1fr}.zones{columns:1}}
+</style>"""
+
+
+# ---------------------------------------------------------------- POTENCIA
+def potencia_page():
+    zones_cols = ["A", "B", "C", "D", "E"]
+    rows = []
+    for m2 in (10, 15, 20, 30, 40, 50, 60, 80, 100, 120, 150, 200):
+        cells = "".join(f"<td>{nf(need_kw(m2, z), 1)} kW</td>" for z in zones_cols)
+        rows.append(f"<tr><td><b>{m2} m²</b></td>{cells}</tr>")
+    head = "<tr><th>Superficie</th>" + "".join(f"<th>{ZONES[z]['name']} ({z})</th>" for z in zones_cols) + "</tr>"
+    by_zone = {}
+    for prov, z in sorted(PROV.items(), key=lambda x: x[0]):
+        by_zone.setdefault(z, []).append(prov)
+    zones_html = "".join(
+        f"<li><b>{ZONES[z]['name']} (zona {ZONES[z]['code']})</b>: {', '.join(by_zone[z])}</li>"
+        for z in ["alpha", "A", "B", "C", "D", "E"] if z in by_zone)
+    prods = [dict(id=p["id"], c=p["category"], n=p["name"], kw=p["potencia_kw"], m2=p["superficie_calefactable_m2"],
+                  r=p.get("valoracion_media") or 0, rc=p.get("resenas_cantidad") or 0)
+             for p in PRODUCTS if p["category"] in ("pellets", "lena-biomasa", "electricos", "gas")
+             and not any(x in p["id"] for x in ("outsunny", "evocamp", "exteriores"))]
+    kw50c, kw80d, kw100d = need_kw(50, "C"), need_kw(80, "D"), need_kw(100, "D")
+
+    body = f"""  <section class="layout calc" aria-labelledby="calcTitle">
+    <form class="card inputs" onsubmit="return false" aria-label="Datos de tu casa">
+      <div class="step">
+        <h2><span class="num">1</span>Tu casa</h2>
+        <div class="field">
+          <label for="prov">Provincia</label>
+          <select id="prov"></select>
+          <div class="clima"><span>Clima: <b id="climaName"></b></span></div>
+        </div>
+        <div class="field">
+          <label for="m2">Metros que quieres calentar <output id="m2Out"></output></label>
+          <input type="range" id="m2" min="5" max="250" step="5" value="80">
+          <div class="chips" id="m2Chips" role="group" aria-label="Superficies típicas">
+            <button type="button" class="chip" data-v="10">Baño 10</button>
+            <button type="button" class="chip" data-v="15">Dormitorio 15</button>
+            <button type="button" class="chip" data-v="30">Salón 30</button>
+            <button type="button" class="chip" data-v="80">Piso 80</button>
+            <button type="button" class="chip" data-v="150">Casa 150</button>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">Aislamiento</span>
+          <div class="seg c3" id="insSeg" role="group" aria-label="Aislamiento">
+            <button type="button" data-v="buena">Bueno<small>Reformada o de 2007 en adelante</small></button>
+            <button type="button" data-v="normal">Normal<small>Ventanas dobles, algo de frío</small></button>
+            <button type="button" data-v="mala">Malo<small>Antigua, ventanas simples</small></button>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">Altura de los techos</span>
+          <div class="seg c3" id="hSeg" role="group" aria-label="Altura de techos">
+            <button type="button" data-v="2.5">Normal<small>Hasta 2,6 m</small></button>
+            <button type="button" data-v="3">Altos<small>Unos 3 m</small></button>
+            <button type="button" data-v="3.5">Muy altos<small>Casa antigua, buhardilla</small></button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="results" aria-live="polite">
+      <div class="card summary">
+        <h2 id="calcTitle" style="color:#fff">Potencia que necesitas</h2>
+        <div class="kpi-big"><b id="kw">–</b><span id="kwCtx"></span></div>
+        <ul class="equiv" id="equiv" style="color:var(--text)"></ul>
+      </div>
+      <div class="card">
+        <h2>Modelos que encajan</h2>
+        <p class="sub" id="picksSub">Estufas de CalorBrasa que calientan tus metros, ordenadas por valoración.</p>
+        <div class="picks" id="picks"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="below">
+    <section class="card prose">
+      <h2>Cómo se calcula la potencia</h2>
+      <p>La regla rápida es <b>1 kW por cada 10 m²</b> en una casa normal. Nosotros afinamos un poco más:</p>
+      <p><b>Potencia (kW) = metros × 95 W × clima × aislamiento × altura de techos</b></p>
+      <ul>
+        <li><b>Clima</b>: de 0,70 en las zonas más suaves (Canarias) a 1,20 en las más frías (Burgos, León, Soria…), según la zona climática de cada provincia del Código Técnico de la Edificación.</li>
+        <li><b>Aislamiento</b>: 0,75 si es bueno, 1 si es normal y 1,35 si es malo.</li>
+        <li><b>Techos</b>: con techos de 3 metros hay un 20 % más de aire que calentar que con 2,5 m.</li>
+      </ul>
+      <p>Por ejemplo, un piso de 80 m² en Madrid (clima frío) con aislamiento normal necesita unos <b>{nf(kw80d, 1)} kW</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tabla de potencia según los metros y el clima</h2>
+      <p class="sub">Aislamiento normal y techos de 2,5 m. Busca tu provincia en la lista de abajo para saber tu clima.</p>
+      <div class="tw"><table class="data">
+        <thead>{head}</thead>
+        <tbody>
+{chr(10).join(rows)}
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="card prose">
+      <h2>¿Qué clima tiene tu provincia?</h2>
+      <p>Usamos la zona climática de invierno de la capital de cada provincia. Si vives en un pueblo de montaña o a más de 800 m de altura, elige un clima más frío.</p>
+      <ul class="zones">{zones_html}</ul>
+    </section>
+
+    <section class="card prose">
+      <h2>¿Qué pasa si eliges mal la potencia?</h2>
+      <ul>
+        <li><b>Si se queda corta</b>, la estufa trabaja siempre a tope, gasta más por hora y aun así no llega a calentar la casa los días de más frío.</li>
+        <li><b>Si te pasas mucho</b>, la pagas más cara y trabaja casi siempre al mínimo. En las de pellets y leña eso ensucia el cristal y el tiro, y quema peor.</li>
+        <li><b>Lo ideal</b> es que la potencia de la estufa sea igual o un poco mayor (hasta un 25 % más) que la que te da la calculadora.</li>
+        <li>Las estufas de butano tienen como mucho <b>4,2 kW</b> y las eléctricas de enchufe unos 2–2,5 kW: para más potencia hacen falta varias, y entonces suele salir mejor una estufa de pellets o de leña.</li>
+      </ul>
+      <p>Cuando sepas los kW, mira <a href="{any_url('barata')}">qué calefacción te sale más barata</a> y <a href="{any_url('home')}">cuánto te costará al mes</a>.</p>
+    </section>
+  </div>"""
+
+    fq = [
+        ("¿Qué potencia de estufa necesito para 50 m²?",
+         f"Unos {nf(kw50c, 1)} kW en clima fresco (zona C) con aislamiento normal, y unos {nf(need_kw(50, 'D'), 1)} kW en clima frío como Madrid. Con mal aislamiento, un 35 % más."),
+        ("¿Y para 80 o 100 m²?",
+         f"En clima frío y con aislamiento normal, unos {nf(kw80d, 1)} kW para 80 m² y unos {nf(kw100d, 1)} kW para 100 m². Para tanta superficie lo más práctico es una estufa de pellets o de leña."),
+        ("¿Cuántos metros calienta una estufa eléctrica de 2.000 W?",
+         f"Unos {nf(2 / (BASE_W * ZONES['C']['f'] / 1000))} m² en clima fresco y unos {nf(2 / (BASE_W * ZONES['D']['f'] / 1000))} m² en clima frío, con aislamiento normal. Es la potencia típica para un dormitorio o un salón pequeño."),
+        ("¿Cuántos metros calienta una estufa de butano?",
+         f"Una de 4.200 W, unos {nf(4.2 / (BASE_W * ZONES['D']['f'] / 1000))} m² en clima frío y aislamiento normal. Para más superficie harían falta varias, y no conviene: hay que ventilar."),
+        ("¿Cuántos metros calienta una estufa de pellets de 8 kW?",
+         f"Unos {nf(8 / (BASE_W * ZONES['C']['f'] / 1000))} m² en clima fresco y unos {nf(8 / (BASE_W * ZONES['D']['f'] / 1000))} m² en clima frío, con aislamiento normal."),
+        ("¿Es mejor pasarse o quedarse corto de potencia?",
+         "Mejor un poco por encima, hasta un 25 % más. Quedarse corto significa pasar frío los peores días; pasarse mucho hace que la estufa trabaje al mínimo, se ensucie y gaste peor."),
+    ]
+    script = f"""<script>
+const ZONES = {json.dumps(ZONES, ensure_ascii=False)};
+const PROV = {json.dumps(PROV, ensure_ascii=False)};
+const INS = {json.dumps(INS)};
+const PRODUCTS = {json.dumps(prods, ensure_ascii=False)};
+const CB = "{CB}";
+const CAT = {json.dumps({k: CAT_URL[k] for k in ("pellets", "lena-biomasa", "electricos", "gas")})};
+const GUIDE = {json.dumps({"pellets": any_url("pellets"), "lena-biomasa": any_url("lena"), "electricos": any_url("electrica"), "gas": any_url("butano")})};
+{POT_JS}
+</script>"""
+    return shell(
+        "potencia",
+        "¿Qué potencia de estufa necesito? Calculadora de kW según los m²",
+        f"Calcula los kW que necesitas según los metros, tu provincia, el aislamiento y la altura de techos, y qué estufa de pellets, leña, butano o eléctrica encaja. Ejemplo: 80 m² en Madrid, unos {nf(kw80d, 1)} kW.",
+        "Calcula cuántos kW necesitas para tus metros, según tu provincia, el aislamiento y la altura de los techos, y qué estufas encajan con tu casa.",
+        f"La regla rápida es <b>1 kW por cada 10 m²</b>. Afinando con el clima: un piso de 80 m² con aislamiento normal necesita unos <b>{nf(need_kw(80, 'C'), 1)} kW</b> en clima fresco y unos <b>{nf(kw80d, 1)} kW</b> en clima frío como Madrid. Con mal aislamiento o techos altos, bastante más.",
+        body, fq, (CB + "productos.html", "Ver estufas en CalorBrasa →"), script)
+
+
+POT_JS = r"""
+const $ = id => document.getElementById(id);
+const nf = (v, d = 0) => v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
+const S = { prov: "Madrid", m2: 80, ins: "normal", h: 2.5 };
+const score = p => ((p.r || 0) * (p.rc || 0) + 4.3 * 15) / ((p.rc || 0) + 15);
+const NAMES = { pellets: "De pellets", "lena-biomasa": "De leña", electricos: "Eléctricas", gas: "De butano" };
+function pick(cat, m2) {
+  const list = PRODUCTS.filter(p => p.c === cat);
+  const fit = list.filter(p => p.m2 >= m2);
+  if (!fit.length) return { chosen: [...list].sort((a, b) => b.m2 - a.m2 || score(b) - score(a)).slice(0, 3), fits: false };
+  let pool = fit.filter(p => p.m2 <= Math.max(m2 * 1.6, m2 + 15));
+  if (pool.length < 3) pool = [...fit].sort((a, b) => a.m2 - b.m2).slice(0, 6);
+  return { chosen: [...pool].sort((a, b) => score(b) - score(a)).slice(0, 3), fits: true };
+}
+function render() {
+  const z = ZONES[PROV[S.prov]];
+  const kw = S.m2 * 95 * z.f * INS[S.ins] * (S.h / 2.5) / 1000;
+  $("climaName").textContent = `${z.name} (zona ${z.code})`;
+  $("m2Out").textContent = `${S.m2} m²`;
+  $("kw").textContent = `${nf(kw, 1)} kW`;
+  $("kwCtx").textContent = `para ${S.m2} m² en ${S.prov} · ${nf(kw * 1000 / S.m2)} W por m²`;
+  const hi = Math.ceil(kw * 1.25 * 2) / 2, lo = Math.max(0.5, Math.round(kw * 2) / 2);
+  const e = [];
+  const nE = Math.ceil(kw / 2), nB = Math.ceil(kw / 4.2);
+  e.push(nE <= 1 ? `<b>Una estufa o radiador eléctrico de ${kw <= 1 ? "1.000" : kw <= 1.5 ? "1.500" : "2.000"} W</b> te basta. <a href="${GUIDE.electricos}">¿Cuánto gasta?</a>`
+                 : `Con electricidad, <b>${nE} aparatos de 2.000 W</b>: para tanta superficie sale caro. <a href="${GUIDE.electricos}">¿Cuánto gasta?</a>`);
+  e.push(nB <= 1 ? `<b>Una estufa de butano</b> (4,2 kW) llega, ventilando la habitación. <a href="${GUIDE.gas}">¿Cuánto gasta?</a>`
+                 : `Con butano harían falta <b>${nB} estufas</b>: no es buena idea, mejor como apoyo puntual. <a href="${GUIDE.gas}">¿Cuánto gasta?</a>`);
+  e.push(kw < 4 ? `Una estufa de pellets o de leña sería demasiado grande para tan pocos metros.`
+                : `<b>Una estufa de pellets o de leña de ${nf(lo, 1)} a ${nf(hi, 1)} kW</b>. <a href="${GUIDE.pellets}">¿Cuánto gasta?</a>`);
+  if (kw > 15) e.push(`Para más de 15 kW, mira estufas de pellets canalizables o una caldera.`);
+  $("equiv").innerHTML = e.map(x => `<li>${x}</li>`).join("");
+  const cats = kw < 4 ? ["electricos", "gas"] : ["pellets", "lena-biomasa", "electricos", "gas"];
+  $("picks").innerHTML = cats.map(c => {
+    const { chosen, fits } = pick(c, S.m2);
+    if (!chosen.length) return "";
+    const note = fits ? "" : ` <small>(ninguna llega a ${S.m2} m² sola: estas son las más potentes)</small>`;
+    return `<div><h3>${NAMES[c]}${note}</h3><ul>${chosen.map(p => `<li><a href="${CB}producto/${p.id}.html">${p.n}</a> <small>· ${nf(p.kw, 1)} kW · hasta ${p.m2} m²</small></li>`).join("")}</ul>
+      <small><a href="${CAT[c]}">Ver todas →</a></small></div>`;
+  }).join("");
+}
+const sel = $("prov");
+sel.innerHTML = Object.keys(PROV).sort((a, b) => a.localeCompare(b, "es")).map(p => `<option${p === S.prov ? " selected" : ""}>${p}</option>`).join("");
+sel.onchange = () => { S.prov = sel.value; render(); };
+const press = (id, val) => $(id).querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v === String(val))));
+$("m2").oninput = e => { S.m2 = +e.target.value; press("m2Chips", ""); render(); };
+$("m2Chips").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.m2 = +b.dataset.v; $("m2").value = S.m2; press("m2Chips", S.m2); render(); };
+$("insSeg").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.ins = b.dataset.v; press("insSeg", S.ins); render(); };
+$("hSeg").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.h = +b.dataset.v; press("hSeg", b.dataset.v); render(); };
+press("insSeg", S.ins); press("hSeg", "2.5"); press("m2Chips", S.m2);
+render();
+"""
+
+
+# ---------------------------------------------------------------- MÁS BARATA
+def barata_page():
+    systems = [
+        ("bdc", "Bomba de calor (aire acondicionado con bomba de calor)", (c_bdc_low, c_bdc_high), "Hace falta tener el aparato instalado", None),
+        ("gn", "Caldera de gas natural", (c_gn_low, c_gn_high), "Solo si tienes gas natural en casa", None),
+        ("pellet", "Estufa de pellets", cpk("pellet"), "Necesita salida de humos", CAT_URL["pellets"]),
+        ("lena", "Estufa de leña", cpk("lena"), "Necesita salida de humos", CAT_URL["lena-biomasa"]),
+        ("butano", "Estufa de butano", cpk("butano"), "Sin instalación; hay que ventilar", CAT_URL["gas"]),
+        ("gasoleo", "Caldera de gasóleo", cpk("gasoleo"), "Precio en subida", None),
+        ("luz", "Estufa o radiador eléctrico", cpk("luz"), "Enchufar y listo", CAT_URL["electricos"]),
+        ("chimenea", "Chimenea abierta de leña", cpk("chimenea"), "Se pierde el 80 % del calor", None),
+    ]
+
+    def cval(c):
+        return c if isinstance(c, float) else (c[0] + c[1]) / 2
+
+    def ctext(c, mult=100, unit=" cts"):
+        if isinstance(c, tuple):
+            return f"{nf(c[0] * mult, 0 if mult > 100 else 1)}–{nf(c[1] * mult, 0 if mult > 100 else 1)}{unit}"
+        return f"{nf(c * mult, 0 if mult > 100 else 1)}{unit}"
+
+    rows = []
+    for i, (k, name, c, tag, url) in enumerate(sorted(systems, key=lambda s: cval(s[2]))):
+        nm = f'<a href="{url}">{name}</a>' if url else name
+        rows.append(f"<tr><td>{i + 1}</td><td>{nm}</td><td><b>{ctext(c)}</b></td><td>{ctext(c, 1000, ' €')}</td><td>{tag}</td></tr>")
+
+    scen = [("Piso de 60 m² en Valencia", 60, "B"), ("Piso de 80 m² en Madrid", 80, "D"), ("Casa de 150 m² en Burgos", 150, "E")]
+    scen_sys = [("Bomba de calor", (c_bdc_low, c_bdc_high)), ("Gas natural", (c_gn_low, c_gn_high)), ("Pellets", cpk("pellet")),
+                ("Leña", cpk("lena")), ("Butano*", cpk("butano")), ("Gasóleo", cpk("gasoleo")), ("Eléctrica", cpk("luz"))]
+    s_head = "<tr><th>Sistema</th>" + "".join(f"<th>{n}<br><small>{nf(rnd(season_kwh(m, z)))} kWh al año</small></th>" for n, m, z in scen) + "</tr>"
+    s_rows = []
+    for name, c in scen_sys:
+        cells = []
+        for _, m, z in scen:
+            E = season_kwh(m, z)
+            cells.append(f"<td>{nf(rnd(E * c[0]))}–{eur(rnd(E * c[1]), 0)}</td>" if isinstance(c, tuple) else f"<td><b>{eur(rnd(E * c), 0)}</b></td>")
+        s_rows.append(f"<tr><td>{name}</td>{''.join(cells)}</tr>")
+
+    E80 = season_kwh(80, "D")
+    go, pl = E80 * cpk("gasoleo"), E80 * cpk("pellet")
+    save = go - pl
+    ratio_luz_pel = cpk("luz") / cpk("pellet")
+
+    body = f"""  <div class="below" style="margin-top:22px">
+    <section class="card">
+      <h2>Lo que cuesta cada kWh de calor</h2>
+      <p class="sub">Precio de cada kWh de calor que llega a tu casa, ya descontado lo que se pierde por el camino. Es la forma justa de comparar sistemas.</p>
+      <div class="tw"><table class="data">
+        <thead><tr><th></th><th>Sistema</th><th>Coste por kWh de calor</th><th>1.000 kWh de calor</th><th>A tener en cuenta</th></tr></thead>
+        <tbody>
+{chr(10).join(rows)}
+        </tbody>
+      </table></div>
+      <p class="note">Precios de {PRICES_TXT}: luz a {nf(LUZ, 2)} €/kWh, bombona de butano a {eur(P['bombona'], 2)}, saco de pellets de 15 kg a {eur(P['saco'], 2)}, leña seca a {nf(P['lena'], 2)} €/kg y gasóleo a {nf(P['gasoleo'], 2)} €/litro.
+      Gas natural: tarifa regulada (TUR) desde el 1 de octubre de 2026, de {nf(GAS_TUR_LOW * 100, 1)} céntimos/kWh antes de impuestos según <a href="https://www.papernest.es/estudios/tur-gas-octubre-2026/" target="_blank" rel="noopener">papernest</a> a {nf(GAS_TUR_HIGH * 100, 1)} según la estimación de la <a href="https://www.ocu.org/vivienda-y-energia/gas-luz/noticias/subida-tur-octubre-2026" target="_blank" rel="noopener">OCU</a>; les sumamos impuestos y una caldera que rinde al 90 %, sin contar la cuota fija mensual.
+      Bomba de calor: entre 3 y 4 kWh de calor por cada kWh de luz, según el aparato y el frío que haga.</p>
+    </section>
+
+    <section class="card">
+      <h2>Lo que cuesta un invierno en tres casas</h2>
+      <p class="sub">Aislamiento normal y uso habitual en cada clima: 5 h al día durante 4 meses en Valencia, 7 h durante 6 meses en Madrid y 8 h durante 7 meses en Burgos.</p>
+      <div class="tw"><table class="data">
+        <thead>{s_head}</thead>
+        <tbody>
+{chr(10).join(s_rows)}
+        </tbody>
+      </table></div>
+      <p class="note">* Una estufa de butano llega a unos 40 m²: para un piso entero harían falta varias y no es recomendable. Calcula tu propia casa en la <a href="{BASE}">calculadora de calefacción</a>.</p>
+    </section>
+
+    <section class="card prose">
+      <h2>¿Cuál te conviene a ti?</h2>
+      <ul>
+        <li><b>Si tienes aire acondicionado con bomba de calor</b>, úsalo: es lo más barato por kWh, sobre todo en climas suaves. Un aparato de enchufe gasta {nf(cpk('luz') / c_bdc_high, 0)}–{nf(cpk('luz') / c_bdc_low, 0)} veces más por el mismo calor.</li>
+        <li><b>Si tienes gas natural</b>, la caldera sigue siendo de lo más barato aunque la tarifa haya subido en octubre. Ajusta el termostato y revisa si te compensa la TUR o una oferta del mercado libre.</li>
+        <li><b>Si tienes casa con chimenea o puedes poner salida de humos</b>, una <a href="{CAT_URL['pellets']}">estufa de pellets</a> es la opción barata y cómoda (se programa y tiene termostato). Si tienes leña propia o barata, la <a href="{CAT_URL['lena-biomasa']}">estufa de leña</a> sale aún mejor.</li>
+        <li><b>Si calientas con gasóleo</b>, una estufa de pellets te ahorra alrededor de un {nf((1 - cpk('pellet') / cpk('gasoleo')) * 100)} %: en un piso de 80 m² en Madrid, unos {eur(rnd(save), 0)} al año. Con una estufa de unos 1.500 € instalada, se paga en unos {math.ceil(1500 / save)} inviernos.</li>
+        <li><b>Si vives en un piso sin salida de humos y sin aire acondicionado</b>, calienta solo donde estás: <a href="{CAT_URL['radiadores']}">radiadores</a> o <a href="{CAT_URL['electricos']}">estufas eléctricas</a> con termostato para ratos cortos, o una <a href="{CAT_URL['gas']}">estufa de butano</a> como apoyo en el salón, ventilando.</li>
+        <li><b>Para una segunda residencia o pocas horas al mes</b>, manda el precio de compra: una eléctrica o una de butano cuestan poco y el gasto por hora importa menos si casi no la usas.</li>
+      </ul>
+      <p>¿No sabes qué potencia necesitas? Usa la <a href="{any_url('potencia')}">calculadora de potencia según los m²</a>.</p>
+    </section>
+
+    <section class="card prose">
+      <h2>Trucos para pagar menos con cualquier calefacción</h2>
+      <ul>
+        <li><b>Termostato a 19–20 °C.</b> Cada grado de más sube el gasto alrededor de un 7 %.</li>
+        <li><b>Calienta solo las habitaciones que usas</b> y cierra las puertas de las demás.</li>
+        <li><b>Tapa las fugas de aire</b>: burletes en puertas y ventanas, y persianas bajadas al anochecer.</li>
+        <li><b>Mantenimiento</b>: una estufa de pellets o una caldera sucia quema peor y gasta más.</li>
+      </ul>
+    </section>
+  </div>"""
+
+    fq = [
+        ("¿Qué calefacción es más barata para un piso?",
+         f"Si tienes bomba de calor (aire acondicionado frío-calor), es lo más barato de usar: unos {nf(c_bdc_low * 100, 0)}–{nf(c_bdc_high * 100, 0)} céntimos por kWh de calor. Le siguen el gas natural y, si el piso tiene salida de humos, la estufa de pellets ({nf(cpk('pellet') * 100, 1)} céntimos). Sin ninguna de esas opciones, calienta solo donde estás con aparatos eléctricos o butano."),
+        ("¿Es más barato el aire acondicionado que una estufa eléctrica?",
+         f"Sí, si tiene bomba de calor: por cada kWh de luz da entre 3 y 4 kWh de calor, así que calentar te cuesta entre la tercera y la cuarta parte que con una estufa eléctrica de resistencia."),
+        ("¿Qué es más barato, pellets o gas natural?",
+         f"Con la tarifa regulada de octubre de 2026, muy parecido: el gas natural sale a unos {nf(c_gn_low * 100, 0)}–{nf(c_gn_high * 100, 0)} céntimos por kWh de calor (más la cuota fija) y los pellets a {nf(cpk('pellet') * 100, 1)} céntimos. Si ya tienes caldera de gas, no compensa cambiar solo por el precio."),
+        ("¿Qué calefacción es más barata sin obras?",
+         f"Sin instalación, el butano ({nf(cpk('butano') * 100, 1)} céntimos por kWh) es más barato de usar que una estufa eléctrica ({nf(cpk('luz') * 100, 1)} céntimos), pero hay que ventilar y no sirve para dormitorios ni baños. Si tienes aire acondicionado con bomba de calor, gana a los dos."),
+        ("¿Compensa cambiar la caldera de gasóleo por una estufa de pellets?",
+         f"Con los precios de {PRICES_TXT}, sí: el calor sale alrededor de un {nf((1 - cpk('pellet') / cpk('gasoleo')) * 100)} % más barato. En un piso de 80 m² en Madrid ahorrarías unos {eur(rnd(save), 0)} al año."),
+        ("¿Cuánto más cara es una estufa eléctrica que una de pellets?",
+         f"Por el mismo calor, unas {nf(ratio_luz_pel, 1)} veces más: {nf(cpk('luz') * 100, 1)} céntimos por kWh frente a {nf(cpk('pellet') * 100, 1)}. Por eso la eléctrica conviene para ratos cortos o habitaciones pequeñas."),
+    ]
+    return shell(
+        "barata",
+        "¿Qué calefacción es más barata en 2026? Comparativa de costes",
+        f"La bomba de calor es lo más barato de usar ({nf(c_bdc_low * 100, 0)}–{nf(c_bdc_high * 100, 0)} céntimos por kWh), seguida del gas natural y los pellets; la estufa eléctrica cuesta {nf(cpk('luz') * 100, 0)}. Comparamos 8 sistemas y el gasto de un invierno en 3 casas.",
+        "Comparamos lo que cuesta calentar tu casa con cada sistema (bomba de calor, gas natural, pellets, leña, butano, gasóleo y electricidad) con los precios de este invierno.",
+        f"Con los precios de este otoño, lo más barato de usar es la <b>bomba de calor</b> (unos {nf(c_bdc_low * 100, 0)}–{nf(c_bdc_high * 100, 0)} céntimos por kWh de calor), seguida del <b>gas natural</b> ({nf(c_gn_low * 100, 0)}–{nf(c_gn_high * 100, 0)} céntimos) y las <b>estufas de pellets</b> ({nf(cpk('pellet') * 100, 1)}) y <b>de leña</b> ({nf(cpk('lena') * 100, 1)}). El butano sale a {nf(cpk('butano') * 100, 1)}, el gasóleo a {nf(cpk('gasoleo') * 100, 1)} y la <b>estufa eléctrica a {nf(cpk('luz') * 100, 1)} céntimos</b>: más del doble que los pellets.",
+        body, fq, (CB + "comparador.html", "Comparar estufas →"))
+
+
+# ---------------------------------------------------------------- SEGURIDAD BUTANO
+def seguridad_page():
+    body = f"""  <div class="below" style="margin-top:22px">
+    <section class="card prose">
+      <h2>Los riesgos reales</h2>
+      <p>Una estufa de butano quema el gas dentro de la habitación, sin chimenea. Todo lo que produce la llama se queda en casa, y por eso hay que usarla bien.</p>
+      <div class="risk">
+        <div><b>Falta de oxígeno</b><p>La llama consume el oxígeno del aire. En una habitación pequeña y cerrada puede bajar lo bastante como para causar mareos.</p></div>
+        <div><b>Monóxido de carbono</b><p>Si el gas no se quema bien (poco oxígeno, quemador sucio o averiado) aparece monóxido: un gas sin olor ni color que intoxica.</p></div>
+        <div><b>Humedad</b><p>Quemar butano produce vapor de agua: unos {nf(b_water, 1)} litros por hora a potencia media. En casas frías se condensa en ventanas y paredes.</p></div>
+        <div><b>Fugas de gas</b><p>Una goma vieja o agrietada, o un regulador mal puesto, pueden dejar escapar gas. El butano pesa más que el aire y se acumula abajo.</p></div>
+        <div><b>Incendio y quemaduras</b><p>La parte delantera se calienta mucho: cortinas, ropa o muebles demasiado cerca pueden prender.</p></div>
+        <div><b>Vuelcos</b><p>Al moverla o si la tira un niño o una mascota. Por eso muchas llevan sistema antivuelco.</p></div>
+      </div>
+    </section>
+
+    <section class="card prose">
+      <h2>Los sistemas de seguridad que debe tener</h2>
+      <ul>
+        <li><b>Analizador de atmósfera (ODS)</b>: corta el gas si el oxígeno del aire baja. Lo llevan de serie las estufas actuales; si la tuya es muy antigua y no lo tiene, cámbiala.</li>
+        <li><b>Válvula de seguridad con termopar</b>: corta el gas si la llama se apaga, para que no salga gas sin quemar.</li>
+        <li><b>Antivuelco</b>: apaga la estufa si se cae. Muy recomendable con niños o mascotas.</li>
+      </ul>
+      <p>La norma europea de estas estufas sin salida de humos (EN 449) es para aparatos de hasta 4,2 kW: por eso casi todas las estufas de butano tienen esa potencia. Puedes ver los modelos y sus sistemas de seguridad en las <a href="{CAT_URL['gas']}">estufas de butano de CalorBrasa</a>.</p>
+    </section>
+
+    <section class="card prose">
+      <h2>8 reglas para usarla sin peligro</h2>
+      <ol class="rules">
+        <li><b>Ventila.</b> Deja una rendija abierta o abre la ventana unos minutos cada pocas horas.</li>
+        <li><b>Nunca en el dormitorio ni en el baño</b>, y nunca te duermas con ella encendida.</li>
+        <li><b>No la uses en sitios pequeños y cerrados</b>, como un baño, un trastero o una caravana sin ventilación.</li>
+        <li><b>Deja espacio libre delante</b>, de al menos un metro, y no seques ropa encima ni la tapes.</li>
+        <li><b>Revisa la goma</b>: lleva la fecha de caducidad impresa. Si ha caducado o está agrietada, cámbiala.</li>
+        <li><b>Cambia la bombona con la estufa apagada</b> y lejos de cualquier llama. Para buscar fugas usa agua con jabón (salen burbujas), nunca una cerilla o un mechero.</li>
+        <li><b>Guarda las bombonas de repuesto</b> de pie, en un sitio ventilado, nunca en sótanos ni cerca del calor.</li>
+        <li><b>Pon un detector de monóxido de carbono</b> en la habitación. Cuesta poco y avisa antes de que notes nada.</li>
+      </ol>
+    </section>
+
+    <section class="card prose">
+      <h2>Señales de alarma: qué hacer</h2>
+      <div class="alert">
+        <p><b>Si notas dolor de cabeza, mareo, náuseas, cansancio o mucho sueño</b> mientras la estufa está encendida, puede ser monóxido de carbono: apágala, abre las ventanas, sal al aire libre y llama al <b>112</b>.</p>
+        <p><b>Si huele a gas</b>: cierra la llave de la bombona, no enciendas ni apagues luces ni aparatos, abre puertas y ventanas y sal de casa. Si el olor sigue, llama al 112.</p>
+        <p><b>Si la llama es amarilla o anaranjada</b> en una estufa de llama azul, está quemando mal: apágala y que la revise un técnico.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>¿Butano o eléctrica? Según la habitación</h2>
+      <p class="sub">Para algunos sitios es mejor otra estufa.</p>
+      <div class="tw"><table class="data">
+        <thead><tr><th>Dónde</th><th>Mejor opción</th><th>Por qué</th></tr></thead>
+        <tbody>
+          <tr><td>Dormitorio</td><td><a href="{CAT_URL['radiadores']}">Radiador eléctrico</a></td><td>No consume oxígeno, es silencioso y se puede dejar con termostato.</td></tr>
+          <tr><td>Baño</td><td><a href="{CB}producto/electricos-orbegozo-sp6000.html">Calefactor de baño</a></td><td>Calienta en minutos y está pensado para la humedad del baño.</td></tr>
+          <tr><td>Salón, a ratos</td><td><a href="{CAT_URL['gas']}">Estufa de butano</a></td><td>Mucho calor y gasta menos que una eléctrica, ventilando de vez en cuando.</td></tr>
+          <tr><td>Casa con humedad</td><td><a href="{CAT_URL['pellets']}">Pellets</a> o <a href="{CAT_URL['electricos']}">eléctrica</a></td><td>El butano añade vapor de agua y empeora la condensación.</td></tr>
+          <tr><td>Toda la casa</td><td><a href="{CAT_URL['pellets']}">Estufa de pellets</a> o de leña</td><td>Una de butano no pasa de unos 40 m² y habría que ventilar mucho.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">¿Y lo que gasta? Mira <a href="{any_url('butano')}">cuánto gasta una estufa de butano</a> por hora y cuánto dura la bombona.</p>
+    </section>
+  </div>"""
+    fq = [
+        ("¿Se puede dormir con una estufa de butano encendida?",
+         "No. Mientras duermes no notarías si falta oxígeno o aparece monóxido de carbono. Apágala antes de acostarte y no la uses en dormitorios."),
+        ("¿Una estufa de butano puede dar monóxido de carbono?",
+         "Sí, si el gas no se quema bien: por falta de oxígeno, un quemador sucio o una avería. Por eso hay que ventilar, revisarla y, mejor aún, tener un detector de monóxido."),
+        ("¿Cada cuánto hay que ventilar con una estufa de butano?",
+         "Lo más sencillo es dejar una rendija de la ventana abierta mientras funciona. Si no, abre unos minutos cada pocas horas, y siempre que notes el ambiente cargado."),
+        ("¿Caduca la goma del butano?",
+         "Sí. La fecha de caducidad viene impresa en la propia goma: cámbiala antes de esa fecha o en cuanto la veas agrietada o reseca."),
+        ("¿Es seguro usar una estufa de butano en un piso?",
+         "Sí, en el salón o en habitaciones amplias y ventilando, con una estufa que tenga analizador de atmósfera. No en dormitorios ni baños, ni en casas con mucha humedad."),
+        ("¿Qué estufa de butano es más segura?",
+         "Cualquiera actual con analizador de atmósfera, válvula de seguridad y antivuelco. Las de llama azul, infrarrojos y catalíticas son igual de seguras si se usan bien; cambia sobre todo cómo dan el calor."),
+    ]
+    return shell(
+        "seguridad",
+        "¿Es peligrosa una estufa de butano? Riesgos y cómo usarla segura",
+        "Bien usada, una estufa de butano es segura. Los riesgos reales (falta de oxígeno, monóxido, humedad y fugas), los sistemas de seguridad que debe llevar y 8 reglas para usarla sin peligro.",
+        "Los riesgos reales de una estufa de butano, los sistemas de seguridad que debe llevar, las reglas para usarla tranquilo y qué hacer si algo va mal.",
+        "<b>No, si se usa bien.</b> Las estufas de butano actuales llevan un <b>analizador de atmósfera</b> que corta el gas si baja el oxígeno, y una <b>válvula de seguridad</b> que lo corta si se apaga la llama. El peligro aparece al usarla en sitios pequeños y cerrados, sin ventilar o para dormir: puede faltar oxígeno y acumularse <b>monóxido de carbono</b>.",
+        body, fq, (CAT_URL["gas"], "Ver estufas de butano →"), prices=False)
+
+
+GUIDE_BUILDERS = {"potencia": potencia_page, "barata": barata_page, "seguridad": seguridad_page}
+
+
 def sitemap():
-    urls = [(BASE, "1.0")] + [(BASE + pg["slug"] + ".html", "0.8") for pg in PAGES.values()]
+    urls = [(BASE, "1.0")] + [(any_url(k), "0.8") for k in list(PAGES) + list(GUIDES)]
     body = "\n".join(f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{UPDATED_ISO}</lastmod>\n    <priority>{pr}</priority>\n  </url>" for u, pr in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n'
 
@@ -896,6 +1517,10 @@ if __name__ == "__main__":
     for k, pg in PAGES.items():
         out = ROOT / (pg["slug"] + ".html")
         out.write_text(page(k), encoding="utf-8")
+        print("escrito", out.name, len(out.read_bytes()), "bytes")
+    for k, fn in GUIDE_BUILDERS.items():
+        out = ROOT / (GUIDES[k]["slug"] + ".html")
+        out.write_text(fn(), encoding="utf-8")
         print("escrito", out.name, len(out.read_bytes()), "bytes")
     (ROOT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
     print("escrito sitemap.xml")

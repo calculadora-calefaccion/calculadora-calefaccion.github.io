@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Qué calefacción es más barata en 2026? Comparativa de costes</title>
+<meta name="description" content="La bomba de calor es lo más barato de usar (5–7 céntimos por kWh), seguida del gas natural y los pellets; la estufa eléctrica cuesta 20. Comparamos 8 sistemas y el gasto de un invierno en 3 casas.">
+<link rel="canonical" href="https://calculadora-calefaccion.github.io/que-calefaccion-es-mas-barata.html">
+<meta property="og:title" content="¿Qué calefacción es más barata en 2026? Comparativa de costes">
+<meta property="og:description" content="La bomba de calor es lo más barato de usar (5–7 céntimos por kWh), seguida del gas natural y los pellets; la estufa eléctrica cuesta 20. Comparamos 8 sistemas y el gasto de un invierno en 3 casas.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://calculadora-calefaccion.github.io/que-calefaccion-es-mas-barata.html">
+<meta property="og:site_name" content="Calculadora de Calefacción">
+<meta property="og:locale" content="es_ES">
+<meta name="theme-color" content="#C1440E">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVWVPP7SK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QXVWVPP7SK');
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C1440E'/%3E%3Cpath d='M16 6c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-3-1-6 1-9z' fill='%23F2A93B'/%3E%3C/svg%3E">
+<style>
+:root{
+  --primary:#C1440E; --primary-dark:#9c3609; --amber:#F2A93B; --amber-soft:#FCEBCB;
+  --bg:#FAF7F2; --surface:#FFFFFF; --surface-2:#F4EFE8; --text:#221F1D; --muted:#5c5652; --faint:#8a827c;
+  --border:#E7E0D6; --good:#2f7d4f; --good-soft:#e3f2e8; --bar-track:#EFE8DF;
+  --radius:14px; --shadow:0 2px 12px rgba(21,19,18,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --primary:#E0622C; --primary-dark:#c24f1c; --amber:#F2A93B; --amber-soft:#3a2a14;
+    --bg:#151312; --surface:#1f1c1a; --surface-2:#282421; --text:#F3EEE8; --muted:#bdb4ac; --faint:#8f8680;
+    --border:#37312d; --good:#5fc28a; --good-soft:#18301f; --bar-track:#2d2825; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --primary:#E0622C; --primary-dark:#c24f1c; --amber:#F2A93B; --amber-soft:#3a2a14;
+  --bg:#151312; --surface:#1f1c1a; --surface-2:#282421; --text:#F3EEE8; --muted:#bdb4ac; --faint:#8f8680;
+  --border:#37312d; --good:#5fc28a; --good-soft:#18301f; --bar-track:#2d2825; --shadow:none;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--primary)}
+button,select,input{font:inherit;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Cabecera */
+.top{background:#151312;color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:700}
+.brand small{display:block;font-weight:400;color:#cfc6bf;font-size:12px;line-height:1.2}
+.logo{width:32px;height:32px;flex:none}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;text-decoration:none;border:0;border-radius:999px;padding:9px 16px;font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--primary-dark)}
+.btn.ghost{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.btn.ghost:hover{background:var(--primary);color:#fff}
+.net{background:var(--surface);border-bottom:1px solid var(--border)}
+.net .wrap{display:flex;gap:18px;overflow-x:auto;padding-top:9px;padding-bottom:9px;font-size:14px;white-space:nowrap;scrollbar-width:none}
+.net a{color:var(--muted);text-decoration:none}
+.net a:hover{color:var(--primary)}
+.net a.star{color:var(--primary);font-weight:700}
+.net a.on{color:var(--text);font-weight:600}
+
+/* Hero */
+.hero{padding:28px 0 8px}
+.hero h1{font-size:clamp(26px,4.5vw,38px);line-height:1.15;margin:0 0 10px;letter-spacing:-.4px}
+.hero p{margin:0 0 14px;color:var(--muted);max-width:720px;font-size:17px}
+.trust{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.trust li{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--muted)}
+.trust li b{color:var(--text)}
+.hero p.quick{margin:14px 0 0;font-size:15px;color:var(--muted)}
+.hero p.quick a{font-weight:600}
+
+/* Pestañas */
+.tabs{display:flex;gap:6px;background:var(--surface-2);border-radius:999px;padding:5px;margin:20px 0 18px;width:max-content;max-width:100%}
+.tabs button{border:0;background:transparent;border-radius:999px;padding:9px 18px;font-weight:600;font-size:15px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+
+/* Rejilla principal */
+.layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:20px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.inputs{position:sticky;top:12px}
+.step{padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.step h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.num{width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.opt{font-weight:400;color:var(--faint);font-size:13px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field > label,.lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;margin-bottom:6px}
+.field > label output,.lbl output{font-weight:700;color:var(--primary);font-size:16px}
+.hint{font-size:13px;color:var(--muted);margin-top:5px}
+select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg);font-size:16px}
+input[type=number]{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);font-size:16px}
+input[type=range]{width:100%;accent-color:var(--primary);height:28px;margin:0}
+.clima{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;background:var(--amber-soft);border-radius:10px;padding:8px 12px;font-size:14px}
+.link{background:none;border:0;color:var(--primary);text-decoration:underline;cursor:pointer;padding:0;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.seg{display:grid;gap:8px}
+.seg.c3{grid-template-columns:repeat(3,1fr)}
+.seg button{border:1.5px solid var(--border);background:var(--bg);border-radius:10px;padding:9px 6px;font-size:14px;cursor:pointer;line-height:1.25;text-align:center}
+.seg button small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.seg button[aria-pressed="true"]{border-color:var(--primary);background:var(--amber-soft)}
+.seg button[aria-pressed="true"] small{color:var(--text)}
+
+/* Resultados */
+.results{display:grid;gap:18px;min-width:0}
+.summary{background:linear-gradient(135deg,#1c1816,#2a1f1a);color:#fff;border:0}
+.summary .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:4px 0 14px}
+.kpi small{display:block;color:#d6ccc4;font-size:13px}
+.kpi b{display:block;font-size:clamp(22px,3.4vw,30px);line-height:1.15;letter-spacing:-.3px}
+.kpi b.hot{color:var(--amber)}
+.summary .ctx{font-size:14px;color:#d6ccc4;margin:0}
+.summary .verdict{margin:14px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);font-size:16px}
+.summary .verdict b{color:var(--amber)}
+.card h2{font-size:20px;margin:0 0 4px;letter-spacing:-.2px}
+.card .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.row{display:grid;grid-template-columns:28px 1fr auto;gap:4px 12px;align-items:center;padding:12px 10px;border-radius:12px}
+.row:hover{background:var(--surface-2)}
+.row.cur{background:var(--amber-soft)}
+.pos{width:26px;height:26px;border-radius:50%;background:var(--surface-2);color:var(--muted);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.row:first-child .pos{background:var(--good);color:#fff}
+.name{font-weight:650;font-size:15.5px;min-width:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:500;color:var(--muted);background:var(--surface-2);border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.row.cur .tag{background:var(--surface)}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--primary);border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.price{font-weight:750;font-size:18px;text-align:right;white-space:nowrap}
+.price small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.barline{grid-column:2 / 4;height:8px;background:var(--bar-track);border-radius:4px;overflow:hidden}
+.bar{height:100%;background:var(--amber);border-radius:0 4px 4px 0;transition:width .35s ease}
+.row:first-child .bar{background:var(--good)}
+.row.cur .bar{background:var(--primary)}
+.meta{grid-column:2 / 4;font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.meta .save{color:var(--good);font-weight:650}
+.meta .warn{color:var(--primary)}
+.meta a{font-weight:600}
+.more-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+
+/* Productos */
+.pcats{margin:0 0 14px}
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.prod{border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;background:var(--surface);text-decoration:none;color:inherit;transition:transform .15s ease, box-shadow .15s ease}
+.prod:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+.prod .img{background:#fff;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:10px}
+.prod img{max-width:100%;max-height:100%;object-fit:contain}
+.prod .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.prod .pn{font-size:14px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prod .ps{font-size:12.5px;color:var(--muted)}
+.prod .pp{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px}
+.prod .pp b{font-size:14px;color:var(--primary);letter-spacing:1px}
+.prod .pp span{font-size:12.5px;color:var(--muted)}
+.prod .go{font-size:13px;font-weight:700;color:var(--primary)}
+.cta-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.cta-row p{margin:0;font-size:14px;color:var(--muted)}
+
+/* Aparato */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tile{background:var(--amber-soft);border-radius:12px;padding:14px 10px;text-align:center}
+.tile b{display:block;font-size:clamp(20px,3vw,26px);letter-spacing:-.3px}
+.tile small{color:var(--muted);font-size:13px}
+.tile.hot{background:var(--primary);color:#fff}
+.tile.hot small{color:#ffe0d0}
+.facts{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.facts li{padding:10px 12px;background:var(--surface-2);border-radius:10px;font-size:15px}
+
+/* Secciones inferiores */
+.below{display:grid;gap:18px;margin:26px 0}
+details.card summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"+";font-size:22px;color:var(--primary);font-weight:400}
+details.card[open] summary::after{content:"–"}
+.faq h2{font-size:22px;margin:0 0 10px}
+.faq details{border-bottom:1px solid var(--border);padding:12px 0}
+.faq details:last-child{border-bottom:0}
+.faq summary{cursor:pointer;font-weight:650;font-size:16px}
+.faq details p{margin:8px 0 0;color:var(--muted)}
+table.pr{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
+table.pr th,table.pr td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+table.pr th{font-size:12.5px;color:var(--muted);font-weight:600}
+table.pr input{max-width:110px;padding:6px 8px}
+table.pr small{color:var(--muted)}
+.method p,.method li{color:var(--muted);font-size:15px}
+.method ul{padding-left:20px}
+.netlinks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.netlinks a{display:block;border:1px solid var(--border);border-radius:12px;padding:14px;text-decoration:none;color:inherit;background:var(--surface)}
+.netlinks a:hover{border-color:var(--primary)}
+.netlinks b{display:block;color:var(--primary);margin-bottom:2px}
+.netlinks span{font-size:13.5px;color:var(--muted)}
+.bigcta{background:#151312;color:#fff;border-radius:var(--radius);padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.bigcta h2{margin:0 0 4px;font-size:22px}
+.bigcta p{margin:0;color:#cfc6bf}
+footer{border-top:1px solid var(--border);padding:22px 0 30px;font-size:13.5px;color:var(--muted)}
+footer .links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:10px}
+footer .links a.star{font-weight:700}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .inputs{position:static}
+  .prods{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:640px){
+  .summary .kpis{grid-template-columns:1fr 1fr}
+  .summary .kpis .kpi:first-child{grid-column:1 / 3}
+  .prods{grid-template-columns:1fr}
+  .prod{flex-direction:row}
+  .prod .img{width:110px;flex:none;aspect-ratio:auto}
+  .tiles{grid-template-columns:1fr 1fr}
+  .netlinks{grid-template-columns:1fr}
+  .row{padding:12px 6px;gap:4px 10px}
+  .tabs button{padding:9px 13px;font-size:14px}
+  table.pr th:nth-child(3),table.pr td:nth-child(3){display:none}
+}
+</style>
+<style>
+.crumbs{font-size:13.5px;color:var(--muted);margin:16px 0 0}
+.crumbs a{color:var(--muted)}
+.answer{background:var(--amber-soft);border-left:4px solid var(--primary);border-radius:12px;padding:16px 18px;font-size:17px;margin:6px 0 0;max-width:820px}
+.answer p{margin:0}
+.calc{margin-top:22px}
+.below{grid-template-columns:minmax(0,1fr)}
+.below > *{min-width:0}
+.prose p,.prose li{color:var(--text);font-size:16px}
+.prose ul{padding-left:20px;margin:8px 0 0}
+.prose li{margin-bottom:6px}
+.prose h2 + p{margin-top:6px}
+.prose h2:not(:first-child){margin-top:22px}
+.tw{overflow-x:auto;margin-top:12px;-webkit-overflow-scrolling:touch}
+table.data{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+table.data th,table.data td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+table.data th{font-size:12.5px;color:var(--muted);font-weight:600}
+table.data tr.me td{background:var(--amber-soft)}
+table.data td small{color:var(--muted)}
+.price-in{display:flex;align-items:center;gap:8px}
+.price-in input{max-width:120px}
+.note{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+.netlinks.four{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){.netlinks.four{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.netlinks.four{grid-template-columns:1fr}.answer{font-size:16px}}
+</style>
+<style>
+.kpi-big{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:2px 0 12px}
+.kpi-big b{font-size:clamp(34px,6vw,48px);letter-spacing:-1px;color:var(--amber)}
+.kpi-big span{color:#d6ccc4}
+.equiv{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.equiv li{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:15px}
+.equiv li a{font-weight:600}
+.picks{display:grid;gap:14px}
+.picks h3{font-size:15px;margin:0 0 6px}
+.picks ul{margin:0;padding-left:18px}
+.picks li{font-size:14.5px;margin:3px 0}
+.picks small{color:var(--muted)}
+.risk{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.risk div{background:var(--surface-2);border-radius:12px;padding:14px}
+.risk b{display:block;margin-bottom:4px}
+.risk p{margin:0;font-size:15px;color:var(--muted)}
+.alert{background:var(--amber-soft);border-left:4px solid var(--primary);border-radius:12px;padding:14px 16px;margin-top:14px}
+.alert p{margin:0 0 6px}
+.alert p:last-child{margin:0}
+ol.rules{padding-left:22px;margin:8px 0 0}
+ol.rules li{margin-bottom:8px}
+.zones{columns:2;column-gap:24px;font-size:14.5px;margin:10px 0 0;padding:0;list-style:none}
+.zones li{break-inside:avoid;margin-bottom:8px}
+.zones b{color:var(--primary)}
+@media (max-width:640px){.risk{grid-template-columns:1fr}.zones{columns:1}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué calefacción es más barata para un piso?", "acceptedAnswer": {"@type": "Answer", "text": "Si tienes bomba de calor (aire acondicionado frío-calor), es lo más barato de usar: unos 5–7 céntimos por kWh de calor. Le siguen el gas natural y, si el piso tiene salida de humos, la estufa de pellets (9,3 céntimos). Sin ninguna de esas opciones, calienta solo donde estás con aparatos eléctricos o butano."}}, {"@type": "Question", "name": "¿Es más barato el aire acondicionado que una estufa eléctrica?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, si tiene bomba de calor: por cada kWh de luz da entre 3 y 4 kWh de calor, así que calentar te cuesta entre la tercera y la cuarta parte que con una estufa eléctrica de resistencia."}}, {"@type": "Question", "name": "¿Qué es más barato, pellets o gas natural?", "acceptedAnswer": {"@type": "Answer", "text": "Con la tarifa regulada de octubre de 2026, muy parecido: el gas natural sale a unos 7–10 céntimos por kWh de calor (más la cuota fija) y los pellets a 9,3 céntimos. Si ya tienes caldera de gas, no compensa cambiar solo por el precio."}}, {"@type": "Question", "name": "¿Qué calefacción es más barata sin obras?", "acceptedAnswer": {"@type": "Answer", "text": "Sin instalación, el butano (11,9 céntimos por kWh) es más barato de usar que una estufa eléctrica (20,0 céntimos), pero hay que ventilar y no sirve para dormitorios ni baños. Si tienes aire acondicionado con bomba de calor, gana a los dos."}}, {"@type": "Question", "name": "¿Compensa cambiar la caldera de gasóleo por una estufa de pellets?", "acceptedAnswer": {"@type": "Answer", "text": "Con los precios de septiembre de 2026, sí: el calor sale alrededor de un 42 % más barato. En un piso de 80 m² en Madrid ahorrarías unos 340 € al año."}}, {"@type": "Question", "name": "¿Cuánto más cara es una estufa eléctrica que una de pellets?", "acceptedAnswer": {"@type": "Answer", "text": "Por el mismo calor, unas 2,2 veces más: 20,0 céntimos por kWh frente a 9,3. Por eso la eléctrica conviene para ratos cortos o habitaciones pequeñas."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Calculadora de calefacción", "item": "https://calculadora-calefaccion.github.io/"}, {"@type": "ListItem", "position": 2, "name": "¿Qué calefacción es más barata en 2026?", "item": "https://calculadora-calefaccion.github.io/que-calefaccion-es-mas-barata.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "¿Qué calefacción es más barata en 2026? Comparativa de costes", "description": "La bomba de calor es lo más barato de usar (5–7 céntimos por kWh), seguida del gas natural y los pellets; la estufa eléctrica cuesta 20. Comparamos 8 sistemas y el gasto de un invierno en 3 casas.", "inLanguage": "es", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "mainEntityOfPage": "https://calculadora-calefaccion.github.io/que-calefaccion-es-mas-barata.html", "author": {"@type": "Organization", "name": "CalorBrasa", "url": "https://calorbrasa.github.io/"}, "publisher": {"@type": "Organization", "name": "CalorBrasa", "url": "https://calorbrasa.github.io/"}}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="https://calculadora-calefaccion.github.io/">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#C1440E"/><path d="M16 6c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-3-1-6 1-9z" fill="#F2A93B"/></svg>
+      <span>Calculadora de Calefacción<small>una herramienta de CalorBrasa</small></span>
+    </a>
+    <a class="btn" href="https://calorbrasa.github.io/comparador.html">Comparar estufas →</a>
+  </div>
+</header>
+<nav class="net" aria-label="Nuestras webs">
+  <div class="wrap">
+    <a class="star" href="https://calorbrasa.github.io/">★ CalorBrasa</a>
+    <a href="https://calculadora-calefaccion.github.io/">Calculadora</a>
+    <a href="https://calculadora-calefaccion.github.io/calculadora-potencia-estufa.html">Potencia</a>
+    <a class="on" href="https://calculadora-calefaccion.github.io/que-calefaccion-es-mas-barata.html">Más barata</a>
+    <a href="https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-butano.html">Gasto butano</a>
+    <a href="https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-electrica.html">Gasto eléctrica</a>
+    <a href="https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-pellets.html">Gasto pellets</a>
+    <a href="https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-lena.html">Gasto leña</a>
+    <a href="https://calculadora-calefaccion.github.io/es-peligrosa-estufa-butano.html">Seguridad butano</a>
+    <a href="https://calorbrasa.github.io/comparador.html">Comparador de estufas</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <p class="crumbs"><a href="https://calculadora-calefaccion.github.io/">Calculadora de calefacción</a> › ¿Qué calefacción es más barata en 2026?</p>
+  <section class="hero">
+    <h1>¿Qué calefacción es más barata en 2026?</h1>
+    <p>Comparamos lo que cuesta calentar tu casa con cada sistema (bomba de calor, gas natural, pellets, leña, butano, gasóleo y electricidad) con los precios de este invierno.</p>
+    <div class="answer"><p>Con los precios de este otoño, lo más barato de usar es la <b>bomba de calor</b> (unos 5–7 céntimos por kWh de calor), seguida del <b>gas natural</b> (7–10 céntimos) y las <b>estufas de pellets</b> (9,3) y <b>de leña</b> (9,8). El butano sale a 11,9, el gasóleo a 15,9 y la <b>estufa eléctrica a 20,0 céntimos</b>: más del doble que los pellets.</p></div>
+    <ul class="trust" style="margin-top:14px">
+      <li>Actualizado en <b>octubre de 2026</b></li>
+      <li>Precios de <b>septiembre de 2026</b></li>
+    </ul>
+  </section>
+
+  <div class="below" style="margin-top:22px">
+    <section class="card">
+      <h2>Lo que cuesta cada kWh de calor</h2>
+      <p class="sub">Precio de cada kWh de calor que llega a tu casa, ya descontado lo que se pierde por el camino. Es la forma justa de comparar sistemas.</p>
+      <div class="tw"><table class="data">
+        <thead><tr><th></th><th>Sistema</th><th>Coste por kWh de calor</th><th>1.000 kWh de calor</th><th>A tener en cuenta</th></tr></thead>
+        <tbody>
+<tr><td>1</td><td>Bomba de calor (aire acondicionado con bomba de calor)</td><td><b>5,0–6,7 cts</b></td><td>50–67 €</td><td>Hace falta tener el aparato instalado</td></tr>
+<tr><td>2</td><td>Caldera de gas natural</td><td><b>7,1–9,7 cts</b></td><td>71–97 €</td><td>Solo si tienes gas natural en casa</td></tr>
+<tr><td>3</td><td><a href="https://calorbrasa.github.io/categoria/estufas-de-pellets.html">Estufa de pellets</a></td><td><b>9,3 cts</b></td><td>93 €</td><td>Necesita salida de humos</td></tr>
+<tr><td>4</td><td><a href="https://calorbrasa.github.io/categoria/estufas-de-lena.html">Estufa de leña</a></td><td><b>9,8 cts</b></td><td>98 €</td><td>Necesita salida de humos</td></tr>
+<tr><td>5</td><td><a href="https://calorbrasa.github.io/categoria/calefactores-de-gas.html">Estufa de butano</a></td><td><b>11,9 cts</b></td><td>119 €</td><td>Sin instalación; hay que ventilar</td></tr>
+<tr><td>6</td><td>Caldera de gasóleo</td><td><b>15,9 cts</b></td><td>159 €</td><td>Precio en subida</td></tr>
+<tr><td>7</td><td><a href="https://calorbrasa.github.io/categoria/calefactores-electricos.html">Estufa o radiador eléctrico</a></td><td><b>20,0 cts</b></td><td>200 €</td><td>Enchufar y listo</td></tr>
+<tr><td>8</td><td>Chimenea abierta de leña</td><td><b>34,2 cts</b></td><td>342 €</td><td>Se pierde el 80 % del calor</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Precios de septiembre de 2026: luz a 0,20 €/kWh, bombona de butano a 18,84 €, saco de pellets de 15 kg a 5,67 €, leña seca a 0,26 €/kg y gasóleo a 1,35 €/litro.
+      Gas natural: tarifa regulada (TUR) desde el 1 de octubre de 2026, de 5,0 céntimos/kWh antes de impuestos según <a href="https://www.papernest.es/estudios/tur-gas-octubre-2026/" target="_blank" rel="noopener">papernest</a> a 7,0 según la estimación de la <a href="https://www.ocu.org/vivienda-y-energia/gas-luz/noticias/subida-tur-octubre-2026" target="_blank" rel="noopener">OCU</a>; les sumamos impuestos y una caldera que rinde al 90 %, sin contar la cuota fija mensual.
+      Bomba de calor: entre 3 y 4 kWh de calor por cada kWh de luz, según el aparato y el frío que haga.</p>
+    </section>
+
+    <section class="card">
+      <h2>Lo que cuesta un invierno en tres casas</h2>
+      <p class="sub">Aislamiento normal y uso habitual en cada clima: 5 h al día durante 4 meses en Valencia, 7 h durante 6 meses en Madrid y 8 h durante 7 meses en Burgos.</p>
+      <div class="tw"><table class="data">
+        <thead><tr><th>Sistema</th><th>Piso de 60 m² en Valencia<br><small>1.340 kWh al año</small></th><th>Piso de 80 m² en Madrid<br><small>5.120 kWh al año</small></th><th>Casa de 150 m² en Burgos<br><small>14.560 kWh al año</small></th></tr></thead>
+        <tbody>
+<tr><td>Bomba de calor</td><td>67–89 €</td><td>260–340 €</td><td>730–970 €</td></tr>
+<tr><td>Gas natural</td><td>95–130 €</td><td>360–490 €</td><td>1.030–1.410 €</td></tr>
+<tr><td>Pellets</td><td><b>120 €</b></td><td><b>470 €</b></td><td><b>1.350 €</b></td></tr>
+<tr><td>Leña</td><td><b>130 €</b></td><td><b>500 €</b></td><td><b>1.420 €</b></td></tr>
+<tr><td>Butano*</td><td><b>160 €</b></td><td><b>610 €</b></td><td><b>1.730 €</b></td></tr>
+<tr><td>Gasóleo</td><td><b>210 €</b></td><td><b>810 €</b></td><td><b>2.310 €</b></td></tr>
+<tr><td>Eléctrica</td><td><b>270 €</b></td><td><b>1.020 €</b></td><td><b>2.910 €</b></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">* Una estufa de butano llega a unos 40 m²: para un piso entero harían falta varias y no es recomendable. Calcula tu propia casa en la <a href="https://calculadora-calefaccion.github.io/">calculadora de calefacción</a>.</p>
+    </section>
+
+    <section class="card prose">
+      <h2>¿Cuál te conviene a ti?</h2>
+      <ul>
+        <li><b>Si tienes aire acondicionado con bomba de calor</b>, úsalo: es lo más barato por kWh, sobre todo en climas suaves. Un aparato de enchufe gasta 3–4 veces más por el mismo calor.</li>
+        <li><b>Si tienes gas natural</b>, la caldera sigue siendo de lo más barato aunque la tarifa haya subido en octubre. Ajusta el termostato y revisa si te compensa la TUR o una oferta del mercado libre.</li>
+        <li><b>Si tienes casa con chimenea o puedes poner salida de humos</b>, una <a href="https://calorbrasa.github.io/categoria/estufas-de-pellets.html">estufa de pellets</a> es la opción barata y cómoda (se programa y tiene termostato). Si tienes leña propia o barata, la <a href="https://calorbrasa.github.io/categoria/estufas-de-lena.html">estufa de leña</a> sale aún mejor.</li>
+        <li><b>Si calientas con gasóleo</b>, una estufa de pellets te ahorra alrededor de un 42 %: en un piso de 80 m² en Madrid, unos 340 € al año. Con una estufa de unos 1.500 € instalada, se paga en unos 5 inviernos.</li>
+        <li><b>Si vives en un piso sin salida de humos y sin aire acondicionado</b>, calienta solo donde estás: <a href="https://calorbrasa.github.io/categoria/radiadores-electricos.html">radiadores</a> o <a href="https://calorbrasa.github.io/categoria/calefactores-electricos.html">estufas eléctricas</a> con termostato para ratos cortos, o una <a href="https://calorbrasa.github.io/categoria/calefactores-de-gas.html">estufa de butano</a> como apoyo en el salón, ventilando.</li>
+        <li><b>Para una segunda residencia o pocas horas al mes</b>, manda el precio de compra: una eléctrica o una de butano cuestan poco y el gasto por hora importa menos si casi no la usas.</li>
+      </ul>
+      <p>¿No sabes qué potencia necesitas? Usa la <a href="https://calculadora-calefaccion.github.io/calculadora-potencia-estufa.html">calculadora de potencia según los m²</a>.</p>
+    </section>
+
+    <section class="card prose">
+      <h2>Trucos para pagar menos con cualquier calefacción</h2>
+      <ul>
+        <li><b>Termostato a 19–20 °C.</b> Cada grado de más sube el gasto alrededor de un 7 %.</li>
+        <li><b>Calienta solo las habitaciones que usas</b> y cierra las puertas de las demás.</li>
+        <li><b>Tapa las fugas de aire</b>: burletes en puertas y ventanas, y persianas bajadas al anochecer.</li>
+        <li><b>Mantenimiento</b>: una estufa de pellets o una caldera sucia quema peor y gasta más.</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="below">
+    <section class="card faq" id="faq">
+      <h2>Preguntas frecuentes</h2>
+      <details><summary>¿Qué calefacción es más barata para un piso?</summary><p>Si tienes bomba de calor (aire acondicionado frío-calor), es lo más barato de usar: unos 5–7 céntimos por kWh de calor. Le siguen el gas natural y, si el piso tiene salida de humos, la estufa de pellets (9,3 céntimos). Sin ninguna de esas opciones, calienta solo donde estás con aparatos eléctricos o butano.</p></details>
+      <details><summary>¿Es más barato el aire acondicionado que una estufa eléctrica?</summary><p>Sí, si tiene bomba de calor: por cada kWh de luz da entre 3 y 4 kWh de calor, así que calentar te cuesta entre la tercera y la cuarta parte que con una estufa eléctrica de resistencia.</p></details>
+      <details><summary>¿Qué es más barato, pellets o gas natural?</summary><p>Con la tarifa regulada de octubre de 2026, muy parecido: el gas natural sale a unos 7–10 céntimos por kWh de calor (más la cuota fija) y los pellets a 9,3 céntimos. Si ya tienes caldera de gas, no compensa cambiar solo por el precio.</p></details>
+      <details><summary>¿Qué calefacción es más barata sin obras?</summary><p>Sin instalación, el butano (11,9 céntimos por kWh) es más barato de usar que una estufa eléctrica (20,0 céntimos), pero hay que ventilar y no sirve para dormitorios ni baños. Si tienes aire acondicionado con bomba de calor, gana a los dos.</p></details>
+      <details><summary>¿Compensa cambiar la caldera de gasóleo por una estufa de pellets?</summary><p>Con los precios de septiembre de 2026, sí: el calor sale alrededor de un 42 % más barato. En un piso de 80 m² en Madrid ahorrarías unos 340 € al año.</p></details>
+      <details><summary>¿Cuánto más cara es una estufa eléctrica que una de pellets?</summary><p>Por el mismo calor, unas 2,2 veces más: 20,0 céntimos por kWh frente a 9,3. Por eso la eléctrica conviene para ratos cortos o habitaciones pequeñas.</p></details>
+    </section>
+
+    <section class="bigcta">
+      <div>
+        <h2>Encuentra la estufa que más te conviene</h2>
+        <p>En CalorBrasa comparas más de 100 estufas: potencia, metros que calientan, gasto y opiniones.</p>
+      </div>
+      <a class="btn" href="https://calorbrasa.github.io/comparador.html">Ir al comparador de CalorBrasa →</a>
+    </section>
+
+    <section>
+      <h2 style="font-size:20px;margin:0">Amplía información</h2>
+      <div class="netlinks four">
+      <a href="https://calculadora-calefaccion.github.io/calculadora-potencia-estufa.html"><b>¿Qué potencia de estufa necesito?</b><span>Los kW según tus m², tu provincia y el aislamiento.</span></a>
+      <a href="https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-pellets.html"><b>¿Cuánto gasta una estufa de pellets?</b><span>Kilos por hora, sacos al mes y por invierno.</span></a>
+      <a href="https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-electrica.html"><b>¿Cuánto gasta una estufa eléctrica?</b><span>800, 1.500 y 2.000 W por hora y al mes.</span></a>
+      <a href="https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-lena.html"><b>¿Cuánto gasta una estufa de leña?</b><span>Kilos por hora y leña para todo el invierno.</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a class="star" href="https://calorbrasa.github.io/">★ CalorBrasa</a>
+      <a href="https://calculadora-calefaccion.github.io/">Calculadora de calefacción</a>
+      <a href="https://calorbrasa.github.io/categoria/estufas-de-pellets.html">Estufas de pellets</a>
+      <a href="https://calorbrasa.github.io/categoria/estufas-de-lena.html">Estufas de leña</a>
+      <a href="https://calorbrasa.github.io/categoria/calefactores-electricos.html">Estufas eléctricas</a>
+      <a href="https://calorbrasa.github.io/categoria/calefactores-de-gas.html">Estufas de butano</a>
+      <a href="https://calorbrasa.github.io/categoria/radiadores-electricos.html">Radiadores</a>
+    </div>
+    <p>Resultados orientativos. Los enlaces a CalorBrasa llevan a productos de Amazon con enlace de afiliado: si compras, CalorBrasa puede recibir una comisión sin coste extra para ti. © 2026 CalorBrasa.</p>
+  </div>
+</footer>
+
+</body>
+</html>
