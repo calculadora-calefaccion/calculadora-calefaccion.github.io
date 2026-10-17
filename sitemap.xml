@@ -2,8 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://calculadora-calefaccion.github.io/</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-10-18</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-butano.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-electrica.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-pellets.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calculadora-calefaccion.github.io/cuanto-gasta-estufa-lena.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>

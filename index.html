@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calculadora de calefacción 2026: ¿cuánto gasta tu estufa y cuál es más barata?</title>
-<meta name="description" content="Calcula gratis cuánto te cuesta calentar tu casa con una estufa eléctrica, de pellets, de leña o de butano, y cuánto ahorras si dejas el gasóleo. Precios de septiembre de 2026.">
-<meta property="og:title" content="¿Cuánto te cuesta calentar tu casa? Calculadora de calefacción 2026">
-<meta property="og:description" content="Compara el gasto de estufas eléctricas, de pellets, de leña y de butano con los precios actuales.">
+<title>¿Cuánto gasta una estufa? Calculadora de calefacción 2026</title>
+<meta name="description" content="Calcula gratis cuánto gasta tu estufa eléctrica, de butano, de pellets o de leña por hora, al día y al mes, y cuál te sale más barata para calentar tu casa. Precios de 2026.">
+<meta property="og:title" content="¿Cuánto gasta una estufa? Calculadora de calefacción 2026">
+<meta property="og:description" content="Cuánto gasta tu estufa eléctrica, de butano, de pellets o de leña por hora, al día y al mes, y cuál te sale más barata.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#C1440E">
 <link rel="canonical" href="https://calculadora-calefaccion.github.io/">
@@ -75,6 +75,8 @@ button,select,input{font:inherit;color:inherit}
 .trust{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
 .trust li{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--muted)}
 .trust li b{color:var(--text)}
+.hero p.quick{margin:14px 0 0;font-size:15px;color:var(--muted)}
+.hero p.quick a{font-weight:600}
 
 /* Pestañas */
 .tabs{display:flex;gap:6px;background:var(--surface-2);border-radius:999px;padding:5px;margin:20px 0 18px;width:max-content;max-width:100%}
@@ -234,7 +236,11 @@ footer .links a.star{font-weight:700}
 <nav class="net" aria-label="Nuestras webs">
   <div class="wrap">
     <a class="star" href="https://calorbrasa.github.io/" target="_blank" rel="noopener">★ CalorBrasa</a>
-    <a class="on" href="#">Calculadora</a>
+    <a class="on" href="./">Calculadora</a>
+    <a href="cuanto-gasta-estufa-butano.html">Gasto butano</a>
+    <a href="cuanto-gasta-estufa-electrica.html">Gasto eléctrica</a>
+    <a href="cuanto-gasta-estufa-pellets.html">Gasto pellets</a>
+    <a href="cuanto-gasta-estufa-lena.html">Gasto leña</a>
     <a href="#" data-web="gasoleo">Alternativas al gasóleo</a>
     <a href="#" data-web="averias">Averías y seguridad</a>
     <a href="https://calorbrasa.github.io/comparador.html" target="_blank" rel="noopener">Comparador de estufas</a>
@@ -243,13 +249,18 @@ footer .links a.star{font-weight:700}
 
 <main class="wrap">
   <section class="hero">
-    <h1>¿Cuánto te cuesta calentar tu casa?</h1>
-    <p>Descubre qué estufa te sale más barata para tu casa (eléctrica, de pellets, de leña o de butano) y cuánto ahorras si dejas el gasóleo o la chimenea abierta.</p>
+    <h1>¿Cuánto gasta tu estufa y cuánto te cuesta calentar tu casa?</h1>
+    <p>Calcula cuánto gasta tu estufa eléctrica, de butano, de pellets o de leña por hora, al día y al mes, qué estufa te sale más barata para tu casa y cuánto ahorras si dejas el gasóleo o la chimenea abierta.</p>
     <ul class="trust">
       <li><b>Gratis</b> y sin registro</li>
       <li>Precios de <b id="asof">septiembre de 2026</b></li>
       <li><b>4</b> tipos de estufa</li>
     </ul>
+    <p class="quick">Cuánto gasta una estufa
+      <a href="cuanto-gasta-estufa-butano.html">de butano</a> ·
+      <a href="cuanto-gasta-estufa-electrica.html">eléctrica</a> ·
+      <a href="cuanto-gasta-estufa-pellets.html">de pellets</a> ·
+      <a href="cuanto-gasta-estufa-lena.html">de leña</a></p>
   </section>
 
   <div class="tabs" role="tablist" aria-label="Tipo de cálculo">
@@ -456,6 +467,10 @@ footer .links a.star{font-weight:700}
     <section>
       <h2 style="font-size:20px;margin:0">Amplía información</h2>
       <div class="netlinks">
+        <a href="cuanto-gasta-estufa-butano.html"><b>¿Cuánto gasta una estufa de butano?</b><span>Por hora, cuánto dura la bombona y al mes.</span></a>
+        <a href="cuanto-gasta-estufa-electrica.html"><b>¿Cuánto gasta una estufa eléctrica?</b><span>800, 1.500 y 2.000 W por hora y al mes.</span></a>
+        <a href="cuanto-gasta-estufa-pellets.html"><b>¿Cuánto gasta una estufa de pellets?</b><span>Kilos por hora, sacos al mes y por invierno.</span></a>
+        <a href="cuanto-gasta-estufa-lena.html"><b>¿Cuánto gasta una estufa de leña?</b><span>Kilos por hora y leña para todo el invierno.</span></a>
         <a href="#" data-web="gasoleo"><b>Alternativas al gasóleo</b><span>Precio del calor hoy y cuánto ahorras si dejas el gasóleo.</span></a>
         <a href="#" data-web="averias"><b>Averías y seguridad</b><span>Estufa de pellets que no enciende, butano en casa y más.</span></a>
         <a href="https://calorbrasa.github.io/asistente.html" target="_blank" rel="noopener"><b>¿Qué estufa me compro?</b><span>El asistente de CalorBrasa te recomienda modelos en 1 minuto.</span></a>
@@ -879,7 +894,11 @@ function init() {
   $("resetPrices").onclick = () => { P = { ...DEF }; renderPrices(); renderAll(); };
 
   // Enlaces a webs hermanas
-  document.querySelectorAll("[data-web]").forEach(a => { a.href = WEBS[a.dataset.web] || "#"; });
+  // Si la web hermana aún no existe, ocultamos el enlace para no dejar enlaces rotos
+  document.querySelectorAll("[data-web]").forEach(a => {
+    const u = WEBS[a.dataset.web];
+    if (!u || u === "#") a.hidden = true; else a.href = u;
+  });
 
   pressGroup("insSeg", "v", S.ins); pressGroup("tarSeg", "v", S.tarifa); pressGroup("m2Chips", "v", S.m2);
   setZoneDefaults();
